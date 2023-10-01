@@ -4,7 +4,7 @@ export default function Header() {
         <>
             <header id="header" className="header">
                 <h1>
-                    <Link to="/">Wang</Link>
+                    <Link to="/"></Link>
                 </h1>
             </header>
         </>

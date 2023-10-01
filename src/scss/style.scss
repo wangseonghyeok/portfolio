@@ -33,4 +33,130 @@ html {
     }
 }
 
-/* form */
+/* main */
+main {
+    height: calc(100vh - 40px);
+    border: 10px solid #000;
+    border-radius: 30px;
+    overflow: auto;
+    isolation: isolate;
+    &::-webkit-scrollbar {
+        display: none; /* 크롬, 사파리, 오페라, 엣지 */
+    }
+}
+
+.main-section {
+    .sub-section {
+        .portfolio-list {
+            &.grid {
+                display: grid;
+                // overflow-y: auto;
+                scroll-snap-type: none;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-auto-rows: min-content;
+                gap: 10px;
+            }
+            .pf-list-item {
+                position: relative;
+                height: 100%;
+                scroll-snap-align: start;
+                border-radius: 30px;
+                overflow: hidden;
+                .pf-list-inner {
+                    height: 100%;
+                    position: relative;
+                    .pf {
+                        &-img {
+                            > img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                background: #000;
+                                transition: transform 0.5s;
+                            }
+                        }
+                        &-info {
+                            position: absolute;
+                            bottom: 20px;
+                            left: 20px;
+                            pointer-events: none;
+                            &-bottom {
+                                .project {
+                                    &-info {
+                                        > span {
+                                            font-size: 14px;
+                                        }
+                                    }
+                                    &-name {
+                                        font-size: 24px;
+                                        font-weight: 600;
+                                        margin-bottom: 15px;
+                                        white-space: pre-wrap;
+                                        line-height: 1.15;
+                                        opacity: 0;
+                                        transition: opacity 0.5s;
+                                    }
+                                    &-skill {
+                                        opacity: 0;
+                                        transition: opacity 0.5s;
+                                        margin-bottom: 5px;
+                                        > span {
+                                            display: inline-block;
+                                            padding: 0 5px;
+                                            border: 1px solid #fff;
+                                            font-size: 11px;
+                                            line-height: 17px;
+                                            border-radius: 9px;
+                                            + span {
+                                                margin-left: 4px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* hover */
+.main-section {
+    .sub-section {
+        .portfolio-list {
+            &.grid {
+            }
+            .pf-list-item {
+                &:hover {
+                    .pf-list-inner {
+                        .pf {
+                            &-img {
+                                > img {
+                                    &:hover {
+                                        transform: scale(1.07);
+                                    }
+                                }
+                            }
+                            &-info {
+                                &-bottom {
+                                    .project {
+                                        &-info {
+                                        }
+                                        &-name {
+                                            opacity: 1;
+                                        }
+                                        &-skill {
+                                            opacity: 1;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
