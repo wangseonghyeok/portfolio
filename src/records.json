@@ -9,7 +9,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-01.jpg",
+        "img": "project/images/bg-darum-01.jpg",
         "link": "https://www.betterfuture.go.kr/"
     },
     {
@@ -22,7 +22,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-02.jpg",
+        "img": "project/images/bg-darum-02.jpg",
         "link": "https://www.mitsubishielevator.co.kr/"
     },
     {
@@ -35,7 +35,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-03.jpg",
+        "img": "project/images/bg-darum-03.jpg",
         "link": "https://www.tworld.co.kr"
     },
     {
@@ -48,7 +48,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-04.jpg",
+        "img": "project/images/bg-darum-04.jpg",
         "link": "https://www.lscns.co.kr/"
     },
     {
@@ -61,7 +61,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-05.jpg",
+        "img": "project/images/bg-darum-05.jpg",
         "link": "https://www.lguplus.com/ib-roaming/pc/kor"
     },
     {
@@ -74,7 +74,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-06.jpg",
+        "img": "project/images/bg-darum-06.jpg",
         "link": "https://www.homentones.com"
     },
     {
@@ -87,7 +87,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-07.jpg",
+        "img": "project/images/bg-darum-07.jpg",
         "link": "https://keyin.life/kr/mw/main/index.do"
     },
     {
@@ -100,7 +100,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-08.jpg",
+        "img": "project/images/bg-darum-08.jpg",
         "link": "https://www.sto.or.kr/index"
     },
     {
@@ -113,7 +113,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-09.jpg",
+        "img": "project/images/bg-darum-09.jpg",
         "link": ""
     },
     {
@@ -126,7 +126,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-10.jpg",
+        "img": "project/images/bg-darum-10.jpg",
         "link": "http://gleline.com/main.html"
     },
     {
@@ -139,7 +139,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-11.jpg",
+        "img": "project/images/bg-darum-11.jpg",
         "link": "https://dauning.com/"
     },
     {
@@ -152,8 +152,8 @@
         "catagory": "JAVASCRIPT",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-12.jpg",
-        "link": "https://www.mitsubishielevator.co.kr/"
+        "img": "project/images/bg-darum-12.jpg",
+        "link": "https://celebrated-fudge-55e84a.netlify.app/html/"
     },
     {
         "id": 13,
@@ -165,7 +165,7 @@
         "catagory": "JAVASCRIPT",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-13.jpg",
+        "img": "project/images/bg-darum-13.jpg",
         "link": "https://elegant-sprinkles-98b9ba.netlify.app/html/"
     },
     {
@@ -178,7 +178,7 @@
         "catagory": "JAVASCRIPT",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-14.jpg",
+        "img": "project/images/bg-darum-14.jpg",
         "link": "https://keen-lollipop-361e22.netlify.app/html/"
     },
     {
@@ -191,7 +191,7 @@
         "catagory": "NODE",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-15.jpg",
+        "img": "project/images/bg-darum-15.jpg",
         "link": "https://seoulboard.fly.dev/login"
     },
     {
@@ -204,7 +204,7 @@
         "catagory": "REACT",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-16.jpg",
+        "img": "project/images/bg-darum-16.jpg",
         "link": "https://ephemeral-dolphin-18bf83.netlify.app/"
     },
     {
@@ -217,7 +217,7 @@
         "catagory": "JAVASCRIPT",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-17.jpg",
+        "img": "project/images/bg-darum-17.jpg",
         "link": "https://illustrious-froyo-9c4ac5.netlify.app/html/"
     },
     {
@@ -230,7 +230,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-18.jpg",
+        "img": "project/images/bg-darum-18.jpg",
         "link": "https://www.vtk-cs.co.kr/app/mobile/index.php"
     },
     {
@@ -243,7 +243,7 @@
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-19.jpg",
+        "img": "project/images/bg-darum-19.jpg",
         "link": "https://lisma.io/main/index.do"
     },
     {
@@ -252,11 +252,11 @@
         "title": "농협 유통 스마트워크\n구축",
         "brand": "농협",
         "data": "2023",
-        "kind": "Web,Mobile",
+        "kind": "Mobile",
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-20.jpg",
+        "img": "project/images/bg-darum-20.jpg",
         "link": ""
     },
     {
@@ -265,11 +265,11 @@
         "title": "SK Telecom 에이닷\n멤버십 운영",
         "brand": "SK",
         "data": "2023",
-        "kind": "Web,Mobile",
+        "kind": "Mobile",
         "catagory": "HTML,CSS",
         "type": "Project",
         "isVisible": true,
-        "img": "/images/bg-darum-21.jpg",
+        "img": "project/images/bg-darum-21.jpg",
         "link": ""
     }
 ]

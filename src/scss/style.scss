@@ -32,7 +32,15 @@ html {
         }
     }
 }
-
+/* gnb */
+.gnb {
+    position: fixed;
+    height: 72px;
+    padding: 0 30px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 10;
+}
 /* main */
 main {
     height: calc(100vh - 40px);

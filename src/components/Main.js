@@ -14,10 +14,6 @@ export default function Main() {
         }
     };
     useEffect(() => {
-        // window.addEventListener("resize", resizingHandler);
-        // return () => {
-        //     window.removeEventListener("resize", resizingHandler);
-        // };
         window.addEventListener("resize", resizingHandler);
         const mediaQuery = window.matchMedia("screen and (max-width: 720px)");
         let grid = document.querySelector(".portfolio-list");
