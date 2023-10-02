@@ -67,12 +67,36 @@ main {
                     position: relative;
                     .pf {
                         &-img {
+                            display: block;
+                            height: 100%;
+                            position: relative;
                             > img {
                                 width: 100%;
                                 height: 100%;
                                 object-fit: cover;
                                 background: #000;
                                 transition: transform 0.5s;
+                            }
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                width: 100%;
+                                height: 74%;
+                                background: transparent linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%) 0% 0% no-repeat padding-box;
+                                left: 0;
+                                bottom: 0;
+                                opacity: 0.4;
+                                transition: opacity 0.5s;
+                            }
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                background: rgba(0, 0, 0, 0.05);
+                                left: 0;
+                                bottom: 0;
+                                z-index: 1;
                             }
                         }
                         &-info {
@@ -85,6 +109,7 @@ main {
                                     &-info {
                                         > span {
                                             font-size: 14px;
+                                            font-weight: 500;
                                         }
                                     }
                                     &-name {
@@ -99,7 +124,7 @@ main {
                                     &-skill {
                                         opacity: 0;
                                         transition: opacity 0.5s;
-                                        margin-bottom: 5px;
+                                        margin-bottom: 10px;
                                         > span {
                                             display: inline-block;
                                             padding: 0 5px;
@@ -134,16 +159,12 @@ main {
                         .pf {
                             &-img {
                                 > img {
-                                    &:hover {
-                                        transform: scale(1.07);
-                                    }
+                                    transform: scale(1.07);
                                 }
                             }
                             &-info {
                                 &-bottom {
                                     .project {
-                                        &-info {
-                                        }
                                         &-name {
                                             opacity: 1;
                                         }
@@ -155,6 +176,30 @@ main {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+/* media query */
+@media (max-width: 1600px) {
+    .main-section {
+        .sub-section {
+            .portfolio-list {
+                &.grid {
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .main-section {
+        .sub-section {
+            .portfolio-list {
+                &.grid {
+                    grid-template-columns: 1fr 1fr;
                 }
             }
         }

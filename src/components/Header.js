@@ -3,9 +3,9 @@ export default function Header() {
     return (
         <>
             <header id="header" className="header">
-                <h1>
+                <gnb>
                     <Link to="/"></Link>
-                </h1>
+                </gnb>
             </header>
         </>
     );
