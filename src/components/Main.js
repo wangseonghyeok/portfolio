@@ -1,7 +1,6 @@
-import Records from "../records.json";
 import React, { useEffect, useState } from "react";
 
-export default function Main() {
+export default function Main({ item }) {
     const [isMobile, setisMobile] = useState(true);
     let grid = document.querySelector(".portfolio-list");
     const resizingHandler = () => {
@@ -29,29 +28,29 @@ export default function Main() {
                 <section className="main-section">
                     <div className="sub-section">
                         <div className="portfolio-list grid">
-                            {[...Records].reverse().map((record) => {
-                                return record.isVisible ? (
-                                    <div className="pf-list-item" key={record.id}>
+                            {[...item].reverse().map((Val) => {
+                                return Val.isVisible ? (
+                                    <div className="pf-list-item" key={Val.id}>
                                         <div className="pf-list-inner">
-                                            <a href={record.link} target="_blank" className="pf-img" rel="noreferrer">
-                                                <img src={record.img} alt="img"></img>
+                                            <a href={Val.link} target="_blank" className="pf-img" rel="noreferrer">
+                                                <img src={Val.img} alt="img"></img>
                                             </a>
                                             <div className="pf-info">
                                                 <div className="pf-info-bottom">
                                                     <div className="project-skill">
-                                                        {record.skile.map((name, index) => {
+                                                        {Val.skile.map((name, index) => {
                                                             return (
-                                                                <span key={record.id + index + 1}>
+                                                                <span key={Val.id + index + 1}>
                                                                     {index ? "" : ""} {name}
                                                                 </span>
                                                             );
                                                         })}{" "}
                                                     </div>
-                                                    <p className="project-name">{record.title}</p>
+                                                    <p className="project-name">{Val.title}</p>
                                                     <p className="project-info">
-                                                        <span className="info-vlaue">{record.brand} /</span>
-                                                        <span className="info-vlaue"> {record.data} /</span>
-                                                        <span className="info-vlaue"> {record.kind}</span>
+                                                        <span className="info-vlaue">{Val.brand} /</span>
+                                                        <span className="info-vlaue"> {Val.data} /</span>
+                                                        <span className="info-vlaue"> {Val.kind}</span>
                                                     </p>
                                                 </div>
                                             </div>

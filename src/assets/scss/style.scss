@@ -197,6 +197,9 @@ main {
     }
 }
 
+.row-sel {
+    display: flex;
+}
 .custom-sel {
     position: relative;
     @include inline-block-box;
