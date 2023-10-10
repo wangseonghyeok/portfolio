@@ -41,41 +41,44 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         <header id="header" className="header" ref={el}>
             <div className="gnb">
                 <div className="row-sel">
+                    <Link to="/Project" className="name">
+                        Wang
+                    </Link>
                     <div className={`custom-sel ${isOpen ? "open" : ""}`}>
                         <button type="button" onClick={toggleDropdown}>
                             {selectedValue}
                         </button>
-                        <div className="list">
-                            <div onClick={() => handleSelect("Project")}>
-                                <Link to="/Project">Project</Link>
-                            </div>
-                            <div className="profile" onClick={() => handleSelect("Profile")}>
+                        <ul className="list">
+                            <li onClick={() => handleSelect("Project")}>
+                                <Link to="/project">Project</Link>
+                            </li>
+                            <li className="profile" onClick={() => handleSelect("Profile")}>
                                 <Link to="/profile">Profile</Link>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                     <div className={`custom-sel ${kindOpen ? "open" : ""}`}>
                         <button type="button" onClick={catagoryDropdown}>
                             {catagoryValue}
                         </button>
-                        <div className="list">
-                            <div onClick={() => handleCatagory("All")}>
+                        <ul className="list">
+                            <li onClick={() => handleCatagory("All")}>
                                 <button type="button" onClick={() => setItem(Data)}>
-                                    All
+                                    <span>All</span>
+                                    <span className="count">{getAllCount}</span>
                                 </button>
-                                <span>{getAllCount}</span>
-                            </div>
+                            </li>
                             {menuItems.map((Val, id) => {
                                 return (
-                                    <div onClick={() => handleCatagory(Val)} key={id}>
+                                    <li onClick={() => handleCatagory(Val)} key={id}>
                                         <button type="button" onClick={() => filterItem(Val)}>
-                                            {Val}
+                                            <span>{Val}</span>
+                                            <span className="count">{itemCounts[Val]}</span>
                                         </button>
-                                        <span>{itemCounts[Val]}</span>
-                                    </div>
+                                    </li>
                                 );
                             })}
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>
