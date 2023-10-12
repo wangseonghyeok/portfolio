@@ -475,6 +475,7 @@ html.is-locked body {
   height: 72px;
   padding: 0 30px;
   left: 50%;
+  top: 30px;
   transform: translate(-50%);
   z-index: 10;
   display: flex;
@@ -487,7 +488,7 @@ html.is-locked body {
 main {
   height: calc(100vh - 40px);
   border: 10px solid #000;
-  border-radius: 30px;
+  border-radius: 40px;
   overflow: auto;
   isolation: isolate;
 }
@@ -495,6 +496,10 @@ main::-webkit-scrollbar {
   display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 
+.main-section .sub-section .portfolio-list {
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
 .main-section .sub-section .portfolio-list.grid {
   display: grid;
   scroll-snap-type: none;
@@ -502,12 +507,17 @@ main::-webkit-scrollbar {
   grid-auto-rows: min-content;
   gap: 10px;
 }
+.main-section .sub-section .portfolio-list.grid .pf-list-item + .pf-list-item {
+  margin-top: 0px;
+}
 .main-section .sub-section .portfolio-list .pf-list-item {
   position: relative;
   height: 100%;
   scroll-snap-align: start;
-  border-radius: 30px;
   overflow: hidden;
+}
+.main-section .sub-section .portfolio-list .pf-list-item + .pf-list-item {
+  margin-top: 30px;
 }
 .main-section .sub-section .portfolio-list .pf-list-item .pf-list-inner {
   height: 100%;
@@ -626,6 +636,7 @@ main::-webkit-scrollbar {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: all 0.3s ease;
 }
 .custom-sel .list {
   position: absolute;
@@ -638,6 +649,7 @@ main::-webkit-scrollbar {
 }
 .custom-sel.open > button {
   border-radius: 22px 22px 0px 0px;
+  background-image: url("/public/images/arrow-up.png");
 }
 .custom-sel.open .list {
   animation: dropdown 0.3s ease;
@@ -664,7 +676,7 @@ main::-webkit-scrollbar {
   padding-left: 3px;
   margin-bottom: 10px;
   position: absolute;
-  bottom: 5px;
+  top: 14px;
 }
 .custom-sel.open .list > li > a {
   padding: 14px 12px;
@@ -688,6 +700,36 @@ main::-webkit-scrollbar {
 @media (max-width: 1024px) {
   .main-section .sub-section .portfolio-list.grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 720px) {
+  main {
+    height: calc(var(--window-inner-height));
+    border-radius: 2rem;
+  }
+  .main-section .sub-section .portfolio-list {
+    height: calc(var(--window-inner-height));
+  }
+  .main-section .sub-section .portfolio-list .pf-list-item .pf-list-inner .pf-info {
+    bottom: 6rem;
+  }
+  .main-section .sub-section .portfolio-list .pf-list-item .pf-list-inner .pf-info-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+  .main-section .sub-section .portfolio-list .pf-list-item .pf-list-inner .pf-info-bottom .project-name {
+    opacity: 1;
+    order: 1;
+    font-size: 3.6rem;
+  }
+  .main-section .sub-section .portfolio-list .pf-list-item .pf-list-inner .pf-info-bottom .project-skill {
+    opacity: 1;
+    order: 3;
+    margin-bottom: 0px;
+  }
+  .main-section .sub-section .portfolio-list .pf-list-item .pf-list-inner .pf-info-bottom .project-info {
+    margin-bottom: 1rem;
+    order: 2;
   }
 }
 @keyframes dropdown {

@@ -41,6 +41,7 @@ html {
     height: 72px;
     padding: 0 30px;
     left: 50%;
+    top: 30px;
     transform: translate(-50%);
     z-index: 10;
     display: flex;
@@ -52,7 +53,7 @@ html {
 main {
     height: calc(100vh - 40px);
     border: 10px solid #000;
-    border-radius: 30px;
+    border-radius: 40px;
     overflow: auto;
     isolation: isolate;
     &::-webkit-scrollbar {
@@ -63,20 +64,28 @@ main {
 .main-section {
     .sub-section {
         .portfolio-list {
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
             &.grid {
                 display: grid;
-                // overflow-y: auto;
                 scroll-snap-type: none;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 grid-auto-rows: min-content;
                 gap: 10px;
+                .pf-list-item {
+                    + .pf-list-item {
+                        margin-top: 0px;
+                    }
+                }
             }
             .pf-list-item {
                 position: relative;
                 height: 100%;
                 scroll-snap-align: start;
-                border-radius: 30px;
                 overflow: hidden;
+                + .pf-list-item {
+                    margin-top: 30px;
+                }
                 .pf-list-inner {
                     height: 100%;
                     position: relative;
@@ -224,6 +233,7 @@ main {
         text-align: left;
         font-weight: 600;
         @include ellipsis;
+        transition: all 0.3s ease;
     }
     .list {
         position: absolute;
@@ -233,13 +243,11 @@ main {
         width: 100%;
         background-color: #fff;
         border-top: 0;
-        // > li {
-        //     background-color: #eee;
-        // }
     }
     &.open {
         > button {
             border-radius: 22px 22px 0px 0px;
+            background-image: url("/public/images/arrow-up.png");
         }
         .list {
             animation: dropdown 0.3s ease;
@@ -263,7 +271,7 @@ main {
                         padding-left: 3px;
                         margin-bottom: 10px;
                         position: absolute;
-                        bottom: 5px;
+                        top: 14px;
                     }
                 }
                 > a {
@@ -306,7 +314,51 @@ main {
         }
     }
 }
+@media (max-width: 720px) {
+    main {
+        height: calc(var(--window-inner-height));
+        border-radius: rem(20px);
+    }
 
+    .main-section .sub-section .portfolio-list {
+        height: calc(var(--window-inner-height));
+        .pf-list-item {
+            .pf-list-inner {
+                .pf {
+                    &-img {
+                        &::after {
+                        }
+                        &::before {
+                        }
+                    }
+                    &-info {
+                        bottom: rem(60px);
+                        &-bottom {
+                            display: flex;
+                            flex-direction: column;
+                            .project {
+                                &-name {
+                                    opacity: 1;
+                                    order: 1;
+                                    font-size: rem(36px);
+                                }
+                                &-skill {
+                                    opacity: 1;
+                                    order: 3;
+                                    margin-bottom: 0px;
+                                }
+                                &-info {
+                                    margin-bottom: rem(10px);
+                                    order: 2;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @keyframes dropdown {
     0% {
         transform: translateY(-8%);

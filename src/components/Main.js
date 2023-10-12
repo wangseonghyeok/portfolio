@@ -2,23 +2,25 @@ import React, { useEffect, useState } from "react";
 
 export default function Main({ item }) {
     const [isMobile, setisMobile] = useState(true);
-    let grid = document.querySelector(".portfolio-list");
     const resizingHandler = () => {
         if (window.innerWidth <= 720) {
-            setisMobile(true);
-            grid.classList.remove("grid");
-        } else {
             setisMobile(false);
-            grid.classList.add("grid");
+        } else {
+            setisMobile(true);
         }
     };
     useEffect(() => {
+        function syncHeight() {
+            document.documentElement.style.setProperty("--window-inner-height", `${window.innerHeight}px`);
+        }
         window.addEventListener("resize", resizingHandler);
+        window.addEventListener("resize", syncHeight);
         const mediaQuery = window.matchMedia("screen and (max-width: 720px)");
         let grid = document.querySelector(".portfolio-list");
         if (mediaQuery.matches) {
             grid.classList.remove("grid");
             setisMobile(true);
+            syncHeight();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMobile]);
@@ -27,7 +29,7 @@ export default function Main({ item }) {
             <main>
                 <section className="main-section">
                     <div className="sub-section">
-                        <div className="portfolio-list grid">
+                        <div className={`portfolio-list ${isMobile ? "grid" : ""}`}>
                             {[...item].reverse().map((Val) => {
                                 return Val.isVisible ? (
                                     <div className="pf-list-item" key={Val.id}>
