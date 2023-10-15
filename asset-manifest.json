@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio/project/static/css/main.e9e3c37a.css",
-    "main.js": "/portfolio/project/static/js/main.1fd8a09a.js",
+    "main.js": "/portfolio/project/static/js/main.1a5680e9.js",
     "static/js/787.1ed0c42c.chunk.js": "/portfolio/project/static/js/787.1ed0c42c.chunk.js",
     "static/media/Pretendard-Black.woff2": "/portfolio/project/static/media/Pretendard-Black.2825aba8a3a76a2595d9.woff2",
     "static/media/Pretendard-ExtraBold.woff2": "/portfolio/project/static/media/Pretendard-ExtraBold.babf4a56be0400df794f.woff2",
@@ -14,11 +14,11 @@
     "static/media/Pretendard-Thin.woff2": "/portfolio/project/static/media/Pretendard-Thin.8fa9bd9bd88871f96f97.woff2",
     "index.html": "/portfolio/project/index.html",
     "main.e9e3c37a.css.map": "/portfolio/project/static/css/main.e9e3c37a.css.map",
-    "main.1fd8a09a.js.map": "/portfolio/project/static/js/main.1fd8a09a.js.map",
+    "main.1a5680e9.js.map": "/portfolio/project/static/js/main.1a5680e9.js.map",
     "787.1ed0c42c.chunk.js.map": "/portfolio/project/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e9e3c37a.css",
-    "static/js/main.1fd8a09a.js"
+    "static/js/main.1a5680e9.js"
   ]
 }
