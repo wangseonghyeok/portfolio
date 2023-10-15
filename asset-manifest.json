@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "//wangseonghyeok.github.io/project/project/static/css/main.2c94ba91.css",
-    "main.js": "//wangseonghyeok.github.io/project/project/static/js/main.df24af12.js",
-    "static/js/787.1ed0c42c.chunk.js": "//wangseonghyeok.github.io/project/project/static/js/787.1ed0c42c.chunk.js",
-    "static/media/Pretendard-Black.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-Black.2825aba8a3a76a2595d9.woff2",
-    "static/media/Pretendard-ExtraBold.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-ExtraBold.babf4a56be0400df794f.woff2",
-    "static/media/Pretendard-Bold.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-Bold.d30949674103a6de14b6.woff2",
-    "static/media/Pretendard-SemiBold.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-SemiBold.96cc5889b6ca53fa93dd.woff2",
-    "static/media/Pretendard-Medium.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-Medium.36ca9703d1975d433341.woff2",
-    "static/media/Pretendard-Regular.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-Regular.ccfdbf26e30554c0ae97.woff2",
-    "static/media/Pretendard-Light.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-Light.b84237c9d0eb0f59f977.woff2",
-    "static/media/Pretendard-ExtraLight.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-ExtraLight.aac2eba6e81ad75f093a.woff2",
-    "static/media/Pretendard-Thin.woff2": "//wangseonghyeok.github.io/project/project/static/media/Pretendard-Thin.8fa9bd9bd88871f96f97.woff2",
-    "index.html": "//wangseonghyeok.github.io/project/project/index.html",
-    "main.2c94ba91.css.map": "//wangseonghyeok.github.io/project/project/static/css/main.2c94ba91.css.map",
-    "main.df24af12.js.map": "//wangseonghyeok.github.io/project/project/static/js/main.df24af12.js.map",
-    "787.1ed0c42c.chunk.js.map": "//wangseonghyeok.github.io/project/project/static/js/787.1ed0c42c.chunk.js.map"
+    "main.css": "/portfolio/project/static/css/main.e9e3c37a.css",
+    "main.js": "/portfolio/project/static/js/main.1fd8a09a.js",
+    "static/js/787.1ed0c42c.chunk.js": "/portfolio/project/static/js/787.1ed0c42c.chunk.js",
+    "static/media/Pretendard-Black.woff2": "/portfolio/project/static/media/Pretendard-Black.2825aba8a3a76a2595d9.woff2",
+    "static/media/Pretendard-ExtraBold.woff2": "/portfolio/project/static/media/Pretendard-ExtraBold.babf4a56be0400df794f.woff2",
+    "static/media/Pretendard-Bold.woff2": "/portfolio/project/static/media/Pretendard-Bold.d30949674103a6de14b6.woff2",
+    "static/media/Pretendard-SemiBold.woff2": "/portfolio/project/static/media/Pretendard-SemiBold.96cc5889b6ca53fa93dd.woff2",
+    "static/media/Pretendard-Medium.woff2": "/portfolio/project/static/media/Pretendard-Medium.36ca9703d1975d433341.woff2",
+    "static/media/Pretendard-Regular.woff2": "/portfolio/project/static/media/Pretendard-Regular.ccfdbf26e30554c0ae97.woff2",
+    "static/media/Pretendard-Light.woff2": "/portfolio/project/static/media/Pretendard-Light.b84237c9d0eb0f59f977.woff2",
+    "static/media/Pretendard-ExtraLight.woff2": "/portfolio/project/static/media/Pretendard-ExtraLight.aac2eba6e81ad75f093a.woff2",
+    "static/media/Pretendard-Thin.woff2": "/portfolio/project/static/media/Pretendard-Thin.8fa9bd9bd88871f96f97.woff2",
+    "index.html": "/portfolio/project/index.html",
+    "main.e9e3c37a.css.map": "/portfolio/project/static/css/main.e9e3c37a.css.map",
+    "main.1fd8a09a.js.map": "/portfolio/project/static/js/main.1fd8a09a.js.map",
+    "787.1ed0c42c.chunk.js.map": "/portfolio/project/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2c94ba91.css",
-    "static/js/main.df24af12.js"
+    "static/css/main.e9e3c37a.css",
+    "static/js/main.1fd8a09a.js"
   ]
 }
