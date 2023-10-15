@@ -24,12 +24,12 @@ function App() {
         itemCounts[category] = count;
     });
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.public_url}>
             <div className="App">
                 <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
                 <Routes>
-                    <Route path="/project" element={<Main item={item} />} />
-                    <Route path="/carrer" element={<Carrer />} />
+                    <Route path="project" element={<Main item={item} />} />
+                    <Route path="carrer" element={<Carrer />} />
                 </Routes>
                 <Footer />
             </div>

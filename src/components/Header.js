@@ -60,7 +60,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         <header id="header" className="header" ref={el}>
             <div className="gnb">
                 <div className="row-sel">
-                    <Link to="/Project" className="name">
+                    <Link to="/project/" className="name">
                         Wang
                     </Link>
                     <div className={`custom-sel ${isOpen ? "open" : ""}`}>
@@ -69,10 +69,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                         </button>
                         <ul className="list">
                             <li onClick={() => handleSelect("Project")}>
-                                <Link to="/project">Project</Link>
+                                <Link to="/project/">Project</Link>
                             </li>
                             <li className="profile" onClick={() => handleSelect("Carrer")}>
-                                <Link to="/carrer">Carrer</Link>
+                                <Link to="/carrer/">Carrer</Link>
                             </li>
                         </ul>
                     </div>
