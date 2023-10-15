@@ -48,6 +48,7 @@ html {
     border-radius: 40px;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px);
+    transition: left 0.5s, top 0.5s, transform 0.5s, width 0.5s;
 }
 /* main */
 main {
@@ -207,8 +208,10 @@ main {
 }
 
 .row-sel {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     .name {
         font-size: 30px;
         font-weight: 700;
@@ -233,7 +236,16 @@ main {
         text-align: left;
         font-weight: 600;
         @include ellipsis;
-        transition: all 0.3s ease;
+        > span {
+            position: relative;
+            .count {
+                position: absolute;
+                font-size: 11px;
+                color: #ff0000;
+                padding-left: 2px;
+                bottom: -3px;
+            }
+        }
     }
     .list {
         position: absolute;
@@ -266,12 +278,12 @@ main {
                     font-weight: 600;
                     text-align: left;
                     > .count {
-                        font-size: 12px;
+                        font-size: 11px;
                         color: #ff0000;
-                        padding-left: 3px;
+                        padding-left: 2px;
                         margin-bottom: 10px;
                         position: absolute;
-                        top: 14px;
+                        top: 12px;
                     }
                 }
                 > a {
@@ -315,9 +327,56 @@ main {
     }
 }
 @media (max-width: 720px) {
+    .gnb {
+        height: rem(62px);
+        padding: rem(0 20px);
+        width: rem(320px);
+        .row-sel {
+            .name {
+                font-size: rem(24px);
+                margin-right: rem(10px);
+            }
+        }
+    }
+
+    .custom-sel {
+        > button {
+            font-size: rem(12px);
+            background-size: rem(10px 5px);
+            height: rem(38px);
+            padding: rem(0 0 0 10px);
+        }
+        &.open {
+            .list {
+                > li {
+                    font-size: rem(12px);
+                    > button {
+                        > .count {
+                            font-size: rem(10px);
+                        }
+                    }
+                }
+            }
+        }
+        + .custom-sel {
+            margin-left: rem(5px);
+        }
+        &:first-of-type {
+            width: rem(88px) !important;
+            > button {
+                width: rem(88px) !important;
+            }
+        }
+        &:last-of-type {
+            width: rem(120px);
+        }
+    }
+
     main {
         height: calc(var(--window-inner-height));
         border-radius: rem(20px);
+        border-left-width: 0;
+        border-right-width: 0;
     }
 
     .main-section .sub-section .portfolio-list {
@@ -341,6 +400,7 @@ main {
                                     opacity: 1;
                                     order: 1;
                                     font-size: rem(36px);
+                                    word-break: keep-all;
                                 }
                                 &-skill {
                                     opacity: 1;
@@ -350,6 +410,9 @@ main {
                                 &-info {
                                     margin-bottom: rem(10px);
                                     order: 2;
+                                    > span {
+                                        font-size: rem(16px);
+                                    }
                                 }
                             }
                         }

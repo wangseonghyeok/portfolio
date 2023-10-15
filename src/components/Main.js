@@ -17,6 +17,7 @@ export default function Main({ item }) {
         window.addEventListener("resize", syncHeight);
         const mediaQuery = window.matchMedia("screen and (max-width: 720px)");
         let grid = document.querySelector(".portfolio-list");
+
         if (mediaQuery.matches) {
             grid.classList.remove("grid");
             setisMobile(true);

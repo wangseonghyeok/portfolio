@@ -6,6 +6,17 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const [kindOpen, setKindOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState("Project"); // 선택된 값을 관리
     const [catagoryValue, setCatagoryValue] = useState("All");
+    const [isMobile, setisMobile] = useState(true);
+    const [scroll, setScroll] = useState(false);
+    const resizingHandler = () => {
+        const main = document.querySelector("main");
+        const gnb = document.querySelector(".gnb");
+        if (window.innerWidth <= 720) {
+            setisMobile(false);
+        } else {
+            setisMobile(true);
+        }
+    };
     let getAllCount = Data.length;
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -37,6 +48,14 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         window.addEventListener("click", handleCloseSelect);
         window.addEventListener("click", catagoryCloseSelect);
     });
+
+    useEffect(() => {
+        window.addEventListener("resize", resizingHandler);
+
+        setisMobile(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMobile]);
+
     return (
         <header id="header" className="header" ref={el}>
             <div className="gnb">
@@ -52,14 +71,23 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                             <li onClick={() => handleSelect("Project")}>
                                 <Link to="/project">Project</Link>
                             </li>
-                            <li className="profile" onClick={() => handleSelect("Profile")}>
-                                <Link to="/profile">Profile</Link>
+                            <li className="profile" onClick={() => handleSelect("Carrer")}>
+                                <Link to="/carrer">Carrer</Link>
                             </li>
                         </ul>
                     </div>
                     <div className={`custom-sel ${kindOpen ? "open" : ""}`}>
                         <button type="button" onClick={catagoryDropdown}>
-                            {catagoryValue}
+                            {catagoryValue === "All" ? (
+                                <span>
+                                    All<span className="count">{getAllCount}</span>
+                                </span>
+                            ) : (
+                                <span>
+                                    {catagoryValue}
+                                    <span className="count">{itemCounts[catagoryValue]}</span>
+                                </span>
+                            )}{" "}
                         </button>
                         <ul className="list">
                             <li onClick={() => handleCatagory("All")}>

@@ -4,6 +4,7 @@ import "./assets/css/style.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/Main";
+import Carrer from "./components/Carrer";
 import Data from "./data.json";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
                 <Routes>
                     <Route path="/project" element={<Main item={item} />} />
+                    <Route path="/carrer" element={<Carrer />} />
                 </Routes>
                 <Footer />
             </div>
