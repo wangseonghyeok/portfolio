@@ -58,7 +58,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
 
     return (
         <header id="header" className="header" ref={el}>
-            <div className={`gnb ${scroll ? "reduce" : ""}`}>
+            <div className={`gnb ${scroll ? "decrease" : ""}`}>
                 <div className="row-sel">
                     <Link to="/project/" className="name">
                         Wang
