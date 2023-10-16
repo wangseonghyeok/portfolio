@@ -645,9 +645,9 @@ main::-webkit-scrollbar {
 }
 .custom-sel > button > span .count {
   position: absolute;
-  font-size: 11px;
+  font-size: 10px;
   color: #ff0000;
-  padding-left: 2px;
+  padding-left: 1px;
   bottom: -3px;
 }
 .custom-sel .list {
@@ -685,7 +685,7 @@ main::-webkit-scrollbar {
 .custom-sel.open .list > li > button > .count {
   font-size: 11px;
   color: #ff0000;
-  padding-left: 2px;
+  padding-left: 1px;
   margin-bottom: 10px;
   position: absolute;
   top: 12px;
@@ -701,6 +701,38 @@ main::-webkit-scrollbar {
 }
 .custom-sel + .custom-sel {
   margin-left: 20px;
+}
+
+#footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+#footer ul {
+  display: flex;
+}
+#footer ul > li .download {
+  background: url("/public/images/ico-download.png") left center no-repeat;
+  background-size: 15px 15px;
+  padding-left: 20px;
+}
+#footer ul > li .link {
+  background: url("/public/images/ico-link.png") left center no-repeat;
+  background-size: 15px 15px;
+  padding-left: 20px;
+}
+#footer ul > li + li {
+  position: relative;
+  padding-left: 25px;
+  margin-left: 25px;
+}
+#footer ul > li + li::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 14px;
+  background: #707070;
+  left: 0;
 }
 
 /* media query */
@@ -740,10 +772,10 @@ main::-webkit-scrollbar {
     margin-left: 0.5rem;
   }
   .custom-sel:first-of-type {
-    width: 8.8rem !important;
+    width: 8.4rem !important;
   }
   .custom-sel:first-of-type > button {
-    width: 8.8rem !important;
+    width: 8.4rem !important;
   }
   .custom-sel:last-of-type {
     width: 12rem;

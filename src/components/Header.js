@@ -6,17 +6,33 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const [kindOpen, setKindOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState("Project"); // 선택된 값을 관리
     const [catagoryValue, setCatagoryValue] = useState("All");
-    const [isMobile, setisMobile] = useState(true);
-    const [scroll, setScroll] = useState(false);
-    const resizingHandler = () => {
-        const main = document.querySelector("main");
-        const gnb = document.querySelector(".gnb");
-        if (window.innerWidth <= 720) {
-            setisMobile(false);
-        } else {
-            setisMobile(true);
-        }
-    };
+    // const [scroll, setScroll] = useState(true);
+    // const targetRef = useRef(null);
+
+    // const handleScroll = (e) => {
+    //     // const gnb = document.querySelector(".gnb");
+    //     const main = document.querySelector("main");
+    //     // console.log(document.querySelector(".main-section").scrollHeight);
+    //     // console.log(e.wheelDelta);
+    //     if (window.innerWidth <= 720) {
+    //         // if (e.wheelDelta < 0) {
+    //         //     console.log("scroll up");
+
+    //         // } else {
+    //         //     console.log("scroll down");
+    //         //     setScroll(true);
+    //         // }
+    //         console.log(e.deltaY);
+    //         if (e.deltaY < 0) {
+    //             setScroll(true);
+    //             console.log("스크롤 위로");
+    //         } else {
+    //             // scroll down
+    //             console.log("스크롤 아래로");
+    //             setScroll(true);
+    //         }
+    //     }
+    // };
     let getAllCount = Data.length;
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -49,12 +65,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         window.addEventListener("click", catagoryCloseSelect);
     });
 
-    useEffect(() => {
-        window.addEventListener("resize", resizingHandler);
-
-        setisMobile(true);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMobile]);
+    // useEffect(() => {
+    //     window.addEventListener("wheel", handleScroll, { capture: true });
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [scroll]);
 
     return (
         <header id="header" className="header" ref={el}>

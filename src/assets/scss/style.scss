@@ -240,9 +240,9 @@ main {
             position: relative;
             .count {
                 position: absolute;
-                font-size: 11px;
+                font-size: 10px;
                 color: #ff0000;
-                padding-left: 2px;
+                padding-left: 1px;
                 bottom: -3px;
             }
         }
@@ -280,7 +280,7 @@ main {
                     > .count {
                         font-size: 11px;
                         color: #ff0000;
-                        padding-left: 2px;
+                        padding-left: 1px;
                         margin-bottom: 10px;
                         position: absolute;
                         top: 12px;
@@ -300,6 +300,40 @@ main {
     }
     + .custom-sel {
         margin-left: 20px;
+    }
+}
+
+#footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    ul {
+        display: flex;
+        > li {
+            .download {
+                background: url("/public/images/ico-download.png") left center no-repeat;
+                background-size: 15px 15px;
+                padding-left: 20px;
+            }
+            .link {
+                background: url("/public/images/ico-link.png") left center no-repeat;
+                background-size: 15px 15px;
+                padding-left: 20px;
+            }
+            + li {
+                position: relative;
+                padding-left: 25px;
+                margin-left: 25px;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    height: 14px;
+                    background: #707070;
+                    left: 0;
+                }
+            }
+        }
     }
 }
 
@@ -362,9 +396,9 @@ main {
             margin-left: rem(5px);
         }
         &:first-of-type {
-            width: rem(88px) !important;
+            width: rem(84px) !important;
             > button {
-                width: rem(88px) !important;
+                width: rem(84px) !important;
             }
         }
         &:last-of-type {
