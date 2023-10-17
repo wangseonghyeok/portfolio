@@ -6,7 +6,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
   const [kindOpen, setKindOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("Project"); // 선택된 값을 관리
   const [catagoryValue, setCatagoryValue] = useState("All");
-  const [scroll, setScroll] = useState(true);
+  const [scroll, setScroll] = useState(false);
   let prevScroll = 0;
   let timer;
   function handleScroll() {
@@ -34,14 +34,12 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
       if (window.innerWidth <= 720) {
         if (prevScroll > currScroll) {
           setScroll(false);
-          console.log("위");
         } else {
           setScroll(true);
-          console.log("아래");
         }
         prevScroll = currScroll;
       }
-    }, 50);
+    }, 20);
 
     // const currScroll = this.scrollTop;
     // if (window.innerWidth <= 720) {
