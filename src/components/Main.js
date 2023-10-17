@@ -8,8 +8,8 @@ export default function Main({ item }) {
         } else {
             setisMobile(true);
 
-            let gnb = document.querySelector(".gnb");
-            gnb.classList.remove("minimized");
+            // let gnb = document.querySelector(".gnb");
+            // gnb.classList.remove("minimized");
         }
     };
     useEffect(() => {

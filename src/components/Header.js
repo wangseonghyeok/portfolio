@@ -7,15 +7,54 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const [selectedValue, setSelectedValue] = useState("Project"); // 선택된 값을 관리
     const [catagoryValue, setCatagoryValue] = useState("All");
     const [scroll, setScroll] = useState(true);
-    const handleScroll = (e) => {
-        if (window.innerWidth <= 720) {
-            if (e.deltaY < 0) {
-                setScroll(false);
-            } else {
-                setScroll(true);
-            }
+    let prevScroll = 0;
+    let timer;
+    function handleScroll() {
+        // console.log(e);
+        // e.preventDefault();
+        // let currentScrollY = document.querySelector(".portfolio-list").scrollY;
+        // console.log(document.body.scrollHeight);
+        // console.log(currentScrollY);
+        // if (window.innerWidth <= 720) {
+        //     console.log(e.deltaY);
+        //     if (e.deltaY < 0) {
+        //         console.log("up");
+        //         setScroll(false);
+        //     } else {
+        //         setScroll(true);
+        //         console.log("down");
+        //     }
+        // }
+
+        if (timer) {
+            clearTimeout(timer);
         }
-    };
+        timer = setTimeout(() => {
+            const currScroll = this.scrollTop;
+            if (window.innerWidth <= 720) {
+                if (prevScroll > currScroll) {
+                    setScroll(false);
+                    console.log("위");
+                } else {
+                    setScroll(true);
+                    console.log("아래");
+                }
+                prevScroll = currScroll;
+            }
+        }, 200);
+
+        // const currScroll = this.scrollTop;
+        // if (window.innerWidth <= 720) {
+        //     if (prevScroll > currScroll) {
+        //         // setScroll(false);
+        //         console.log("위");
+        //     } else {
+        //         // setScroll(true);
+        //         console.log("아래");
+        //     }
+        //     prevScroll = currScroll;
+        // }
+    }
     let getAllCount = Data.length;
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -49,12 +88,9 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     });
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia("screen and (min-width: 720px)");
-        if (mediaQuery.matches) {
-            let gnb = document.querySelector(".gnb");
-            gnb.classList.remove("minimized");
-        }
-        window.addEventListener("wheel", handleScroll, { capture: true });
+        let currentScrollY = document.querySelector(".portfolio-list");
+        currentScrollY.addEventListener("scroll", handleScroll);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scroll]);
 
     return (
