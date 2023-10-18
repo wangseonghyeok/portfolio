@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import "./assets/css/style.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -26,12 +27,14 @@ function App() {
     return (
         <BrowserRouter basename={process.env.public_url}>
             <div className="App">
-                <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
-                <Routes>
-                    <Route path="project" element={<Main item={item} />} />
-                    <Route path="carrer" element={<Carrer />} />
-                </Routes>
-                <Footer />
+                <AnimatePresence>
+                    <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
+                    <Routes>
+                        <Route path="project" element={<Main item={item} />} />
+                        <Route path="carrer" element={<Carrer />} />
+                    </Routes>
+                    <Footer />
+                </AnimatePresence>
             </div>
         </BrowserRouter>
     );
