@@ -221,6 +221,11 @@ main {
         margin-right: 20px;
         color: #000;
     }
+    > div {
+        + div {
+            margin-left: 20px;
+        }
+    }
 }
 .custom-sel {
     @include inline-block-box;
@@ -301,9 +306,9 @@ main {
             }
         }
     }
-    + .custom-sel {
-        margin-left: 20px;
-    }
+    // + .custom-sel {
+    //     margin-left: 20px;
+    // }
 }
 
 #footer {
@@ -373,6 +378,11 @@ main {
                 font-size: rem(24px);
                 margin-right: rem(10px);
             }
+            > div {
+                + div {
+                    margin-left: rem(5px);
+                }
+            }
         }
         &.minimized {
             width: rem(105px);
@@ -409,9 +419,9 @@ main {
                 }
             }
         }
-        + .custom-sel {
-            margin-left: rem(5px);
-        }
+        // + .custom-sel {
+        //     margin-left: rem(5px);
+        // }
         &:first-of-type {
             width: rem(84px) !important;
             > button {

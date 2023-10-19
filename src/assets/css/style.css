@@ -622,6 +622,9 @@ main::-webkit-scrollbar {
   margin-right: 20px;
   color: #000;
 }
+.row-sel > div + div {
+  margin-left: 20px;
+}
 
 .custom-sel {
   display: inline-block;
@@ -705,9 +708,6 @@ main::-webkit-scrollbar {
   color: #000;
   background-color: #f8f8f8;
 }
-.custom-sel + .custom-sel {
-  margin-left: 20px;
-}
 
 #footer {
   display: flex;
@@ -762,6 +762,9 @@ main::-webkit-scrollbar {
     font-size: 2.4rem;
     margin-right: 1rem;
   }
+  .gnb .row-sel > div + div {
+    margin-left: 0.5rem;
+  }
   .gnb.minimized {
     width: 10.5rem;
   }
@@ -784,9 +787,6 @@ main::-webkit-scrollbar {
   }
   .custom-sel.open .list > li > button > .count {
     font-size: 1rem;
-  }
-  .custom-sel + .custom-sel {
-    margin-left: 0.5rem;
   }
   .custom-sel:first-of-type {
     width: 8.4rem !important;

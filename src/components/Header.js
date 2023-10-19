@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import Wrapper from "../components/Wrapper";
 import { Link } from "react-router-dom";
 import Data from "../data.json";
 export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const [isOpen, setIsOpen] = useState(false);
     const [kindOpen, setKindOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState(getSelectedValueFromLocalStorage() || "Project");
-
     const [catagoryValue, setCatagoryValue] = useState("All");
     const [scroll, setScroll] = useState(false);
     let prevScroll = 0;
@@ -80,51 +80,57 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                     <Link to="/project/" className="name" onClick={() => handleSelect("Project")}>
                         Wang
                     </Link>
-                    <div className={`custom-sel ${isOpen ? "open" : ""}`}>
-                        <button type="button" onClick={toggleDropdown}>
-                            {selectedValue}
-                        </button>
-                        <ul className="list">
-                            <li onClick={() => handleSelect("Project")}>
-                                <Link to="/project/">Project</Link>
-                            </li>
-                            <li className="profile" onClick={() => handleSelect("Carrer")}>
-                                <Link to="/carrer/">Carrer</Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className={`custom-sel ${kindOpen ? "open" : ""}`}>
-                        <button type="button" onClick={catagoryDropdown}>
-                            {catagoryValue === "All" ? (
-                                <span>
-                                    All<span className="count">{getAllCount}</span>
-                                </span>
-                            ) : (
-                                <span>
-                                    {catagoryValue}
-                                    <span className="count">{itemCounts[catagoryValue]}</span>
-                                </span>
-                            )}{" "}
-                        </button>
-                        <ul className="list">
-                            <li onClick={() => handleCatagory("All")}>
-                                <button type="button" onClick={() => setItem(Data)}>
-                                    <span>All</span>
-                                    <span className="count">{getAllCount}</span>
+                    <Wrapper>
+                        <div className={`custom-sel ${isOpen ? "open" : ""}`}>
+                            <button type="button" onClick={toggleDropdown}>
+                                {selectedValue}
+                            </button>
+                            <ul className="list">
+                                <li className="project" onClick={() => handleSelect("Project")}>
+                                    <Link to="/project/">Project</Link>
+                                </li>
+                                <li className="carrer" onClick={() => handleSelect("Carrer")}>
+                                    <Link to="/carrer/">Carrer</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </Wrapper>
+                    {selectedValue !== "Carrer" && (
+                        <Wrapper>
+                            <div className={`custom-sel ${kindOpen ? "open" : ""}`}>
+                                <button type="button" onClick={catagoryDropdown}>
+                                    {catagoryValue === "All" ? (
+                                        <span>
+                                            All<span className="count">{getAllCount}</span>
+                                        </span>
+                                    ) : (
+                                        <span>
+                                            {catagoryValue}
+                                            <span className="count">{itemCounts[catagoryValue]}</span>
+                                        </span>
+                                    )}{" "}
                                 </button>
-                            </li>
-                            {menuItems.map((Val, id) => {
-                                return (
-                                    <li onClick={() => handleCatagory(Val)} key={id}>
-                                        <button type="button" onClick={() => filterItem(Val)}>
-                                            <span>{Val}</span>
-                                            <span className="count">{itemCounts[Val]}</span>
+                                <ul className="list">
+                                    <li onClick={() => handleCatagory("All")}>
+                                        <button type="button" onClick={() => setItem(Data)}>
+                                            <span>All</span>
+                                            <span className="count">{getAllCount}</span>
                                         </button>
                                     </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
+                                    {menuItems.map((Val, id) => {
+                                        return (
+                                            <li onClick={() => handleCatagory(Val)} key={id}>
+                                                <button type="button" onClick={() => filterItem(Val)}>
+                                                    <span>{Val}</span>
+                                                    <span className="count">{itemCounts[Val]}</span>
+                                                </button>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        </Wrapper>
+                    )}
                 </div>
             </div>
         </header>
