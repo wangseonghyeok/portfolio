@@ -8,33 +8,34 @@ import Carrer from "./components/Carrer";
 import Data from "./data.json";
 
 function App() {
-  const [item, setItem] = useState(Data);
-  const menuItems = [...new Set(Data.map((Val) => Val.category))];
-  const filterItem = (curcat) => {
-    const newItem = Data.filter((newVal) => {
-      return newVal.category === curcat;
-    });
-    setItem(newItem);
-  };
+    const [item, setItem] = useState(Data);
+    const menuItems = [...new Set(Data.map((Val) => Val.category))];
+    const filterItem = (curcat) => {
+        const newItem = Data.filter((newVal) => {
+            return newVal.category === curcat;
+        });
+        setItem(newItem);
+    };
 
-  const getElCount = Data.map((Val) => Val.category);
-  const itemCounts = {};
-  menuItems.forEach((category) => {
-    const count = getElCount.filter((item) => item.includes(category)).length;
-    itemCounts[category] = count;
-  });
-  return (
-    <BrowserRouter basename={process.env.public_url}>
-      <div className="App">
-        <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
-        <Routes>
-          <Route path="project" element={<Main item={item} />} />
-          <Route path="carrer" element={<Carrer />} />
-        </Routes>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
+    const getElCount = Data.map((Val) => Val.category);
+    const itemCounts = {};
+    menuItems.forEach((category) => {
+        const count = getElCount.filter((item) => item.includes(category)).length;
+        itemCounts[category] = count;
+    });
+    return (
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <div className="App">
+                <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
+                <Routes>
+                    <Route path="/" element={<Main item={item} />} />
+                    <Route path="/project" element={<Main item={item} />} />
+                    <Route path="/carrer" element={<Carrer />} />
+                </Routes>
+                <Footer />
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

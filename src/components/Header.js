@@ -77,7 +77,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         <header id="header" className="header" ref={el}>
             <div className={`gnb ${scroll ? "minimized" : ""}`}>
                 <div className="row-sel">
-                    <Link to="/project/" className="name">
+                    <Link to="/project/" className="name" onClick={() => handleSelect("Project")}>
                         Wang
                     </Link>
                     <div className={`custom-sel ${isOpen ? "open" : ""}`}>
