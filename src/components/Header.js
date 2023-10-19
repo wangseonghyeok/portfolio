@@ -4,11 +4,19 @@ import Data from "../data.json";
 export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const [isOpen, setIsOpen] = useState(false);
     const [kindOpen, setKindOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState("Project"); // 선택된 값을 관리
+    const [selectedValue, setSelectedValue] = useState(getSelectedValueFromLocalStorage() || "Project");
+
     const [catagoryValue, setCatagoryValue] = useState("All");
     const [scroll, setScroll] = useState(false);
     let prevScroll = 0;
     let timer;
+    //새로고침 시 LocalStorage 데이터 유지
+    function saveSelectedValueToLocalStorage(value) {
+        localStorage.setItem("selectedValue", value);
+    }
+    function getSelectedValueFromLocalStorage() {
+        return localStorage.getItem("selectedValue");
+    }
     function handleScroll() {
         if (timer) {
             clearTimeout(timer);
@@ -32,9 +40,9 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const catagoryDropdown = () => {
         setKindOpen(!kindOpen);
     };
-
     const handleSelect = (value) => {
         setSelectedValue(value);
+        saveSelectedValueToLocalStorage(value);
         if (isOpen) {
             setIsOpen(!isOpen);
         }
