@@ -28,6 +28,7 @@ export default function Main({ item }) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMobile]);
+
     return (
         <Wrapper>
             <main>

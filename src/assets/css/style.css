@@ -517,9 +517,6 @@ main::-webkit-scrollbar {
   scroll-snap-align: start;
   overflow: hidden;
 }
-.main-section .sub-section .list .pf-list-item + .pf-list-item {
-  margin-top: 30px;
-}
 .main-section .sub-section .list .pf-list-item .pf-list-inner {
   height: 100%;
   position: relative;
@@ -614,7 +611,6 @@ main::-webkit-scrollbar {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .row-sel .name {
   font-size: 30px;
@@ -765,6 +761,15 @@ main::-webkit-scrollbar {
   .gnb .row-sel > div + div {
     margin-left: 0.5rem;
   }
+  .gnb .row-sel > div:first-of-type > div {
+    width: 8.4rem !important;
+  }
+  .gnb .row-sel > div:first-of-type > div > button {
+    width: 8.4rem !important;
+  }
+  .gnb .row-sel > div:last-of-type > div {
+    width: 12rem;
+  }
   .gnb.minimized {
     width: 10.5rem;
   }
@@ -788,15 +793,6 @@ main::-webkit-scrollbar {
   .custom-sel.open .list > li > button > .count {
     font-size: 1rem;
   }
-  .custom-sel:first-of-type {
-    width: 8.4rem !important;
-  }
-  .custom-sel:first-of-type > button {
-    width: 8.4rem !important;
-  }
-  .custom-sel:last-of-type {
-    width: 12rem;
-  }
   main {
     height: calc(var(--window-inner-height));
     border-radius: 2rem;
@@ -808,6 +804,9 @@ main::-webkit-scrollbar {
   }
   .main-section .sub-section .list > div {
     height: 100%;
+  }
+  .main-section .sub-section .list > div + div {
+    padding-top: 1rem;
   }
   .main-section .sub-section .list .pf-list-item .pf-list-inner .pf-info {
     bottom: 6rem;

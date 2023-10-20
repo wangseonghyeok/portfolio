@@ -16,9 +16,9 @@ export default function Carrer() {
     }, []);
     return (
         <Wrapper>
-            <main>
+            {/* <main>
                 <div className="list"></div>
-            </main>
+            </main> */}
         </Wrapper>
     );
 }
