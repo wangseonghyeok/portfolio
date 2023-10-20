@@ -833,6 +833,9 @@ main::-webkit-scrollbar {
   .main-section .sub-section .list .pf-list-item .pf-list-inner .pf-info-bottom .project-info > span {
     font-size: 1.6rem;
   }
+  #footer {
+    display: none;
+  }
 }
 @keyframes dropdown {
   0% {

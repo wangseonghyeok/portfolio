@@ -33,6 +33,27 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             }
         }, 20);
     }
+    function reRender() {
+        setTimeout(() => {
+            let currentScrollY = document.querySelector(".sub-section .list");
+            currentScrollY.addEventListener("scroll", function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    const currScroll = this.scrollTop;
+                    if (window.innerWidth <= 720) {
+                        if (prevScroll > currScroll) {
+                            setScroll(false);
+                        } else {
+                            setScroll(true);
+                        }
+                        prevScroll = currScroll;
+                    }
+                }, 20);
+            });
+        }, 150);
+    }
 
     let getAllCount = Data.length;
     const toggleDropdown = () => {
@@ -80,7 +101,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         <header id="header" className="header" ref={el}>
             <div className={`gnb ${scroll ? "minimized" : ""}`}>
                 <div className="row-sel">
-                    <Link to="/project/" className="name" onClick={() => handleSelect("Project")}>
+                    <Link to="/project" className="name" onClick={() => handleSelect("Project")}>
                         Wang
                     </Link>
                     <Wrapper>
@@ -93,12 +114,13 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                     className="project"
                                     onClick={() => {
                                         handleSelect("Project");
+                                        reRender();
                                     }}
                                 >
-                                    <Link to="/project/">Project</Link>
+                                    <Link to="/project">Project</Link>
                                 </li>
                                 <li className="carrer" onClick={() => handleSelect("Carrer")}>
-                                    <Link to="/carrer/">Carrer</Link>
+                                    <Link to="/carrer">Carrer</Link>
                                 </li>
                             </ul>
                         </div>
