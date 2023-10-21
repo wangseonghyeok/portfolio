@@ -771,7 +771,7 @@ main::-webkit-scrollbar {
     width: 12rem;
   }
   .gnb.minimized {
-    width: 10.5rem;
+    width: 10.5rem !important;
   }
   .gnb.minimized .custom-sel:first-of-type {
     opacity: 0;

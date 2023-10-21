@@ -8,7 +8,7 @@ export default function Footer() {
                     </a>
                 </li>
                 <li>
-                    <a href="/images/" target="_blank" className="link">
+                    <a href="https://github.com/wangseonghyeok" target="_blank" className="link" rel="noreferrer">
                         Github
                     </a>
                 </li>

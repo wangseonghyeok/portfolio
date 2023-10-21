@@ -399,7 +399,7 @@ main {
             }
         }
         &.minimized {
-            width: rem(105px);
+            width: rem(105px) !important;
 
             .custom-sel {
                 &:first-of-type {

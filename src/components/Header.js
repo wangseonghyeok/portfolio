@@ -85,6 +85,25 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     useEffect(() => {
         window.addEventListener("click", handleCloseSelect);
         window.addEventListener("click", catagoryCloseSelect);
+
+        /* gnb depth 클릭 시 "width" 값이 가변적으로 바뀔때*/
+        const gnb = document.querySelector(".gnb");
+        const project = document.querySelector(".project");
+        const carrer = document.querySelector(".carrer");
+        const name = document.querySelector(".name");
+        const divs = gnb.querySelectorAll("div");
+        project.addEventListener("click", function () {
+            gnb.style.width = "320px";
+        });
+        name.addEventListener("click", function () {
+            gnb.style.width = "320px";
+        });
+        carrer.addEventListener("click", function () {
+            gnb.style.width = "198.94px";
+        });
+        if (divs.length === 3) {
+            gnb.style.width = "198.94px";
+        }
     });
 
     useEffect(() => {
@@ -101,7 +120,14 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         <header id="header" className="header" ref={el}>
             <div className={`gnb ${scroll ? "minimized" : ""}`}>
                 <div className="row-sel">
-                    <Link to="/project" className="name" onClick={() => handleSelect("Project")}>
+                    <Link
+                        to="/project"
+                        className="name"
+                        onClick={() => {
+                            handleSelect("Project");
+                            reRender();
+                        }}
+                    >
                         Wang
                     </Link>
                     <Wrapper>
