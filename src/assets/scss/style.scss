@@ -176,7 +176,84 @@ main {
 .description {
     height: 100%;
 }
+.content {
+    max-width: 900px;
+    margin: 140px auto 0;
+    .work {
+        display: flex;
+        align-items: flex-end;
+        > h1 {
+            font-size: 46px;
+        }
 
+        > span {
+            padding-left: 10px;
+            font-size: 20px;
+        }
+    }
+    .career {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        > p {
+            font-size: 22px;
+        }
+    }
+    .business {
+        margin: 25px 0 0 20px;
+        font-size: 20px;
+        padding-left: 18px;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fff;
+            left: 0px;
+        }
+    }
+    .title-wrap {
+        margin: 25px 0 0 40px;
+        .title-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            .title {
+                position: relative;
+                padding-left: 18px;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background-color: transparent;
+                    border: 1px solid #fff;
+                    left: 0px;
+                }
+            }
+            .date {
+                color: #ccc;
+            }
+        }
+        .desc {
+            font-size: 16px;
+            margin: 15px 0 0 20px;
+            color: #ccc;
+            > p {
+                + p {
+                    margin-top: 8px;
+                }
+            }
+        }
+    }
+}
 /* hover */
 .main-section {
     .sub-section {
@@ -293,6 +370,9 @@ main {
                         margin-bottom: 10px;
                         position: absolute;
                         top: 12px;
+                    }
+                    > span {
+                        color: #000;
                     }
                 }
                 > a {

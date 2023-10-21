@@ -52,10 +52,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                     }
                 }, 20);
             });
-        }, 150);
+        }, 50);
     }
 
-    let getAllCount = Data.length;
+    let getAllCount = Data.main.length;
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -87,7 +87,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         /* gnb depth 클릭 시 "width" 값이 가변적으로 바뀔때 */
         const gnb = document.querySelector(".gnb");
         const project = document.querySelector(".project");
-        const carrer = document.querySelector(".carrer");
+        const career = document.querySelector(".career");
         const name = document.querySelector(".name");
         const divs = gnb.querySelectorAll("div");
         project.addEventListener("click", function () {
@@ -96,7 +96,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         name.addEventListener("click", function () {
             gnb.style.width = "320px";
         });
-        carrer.addEventListener("click", function () {
+        career.addEventListener("click", function () {
             gnb.style.width = "198.94px";
         });
         if (divs.length === 3) {
@@ -149,13 +149,13 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                 >
                                     <Link to="/project">Project</Link>
                                 </li>
-                                <li className="carrer" onClick={() => handleSelect("Carrer")}>
-                                    <Link to="/carrer">Carrer</Link>
+                                <li className="career" onClick={() => handleSelect("Career")}>
+                                    <Link to="/career">Career</Link>
                                 </li>
                             </ul>
                         </div>
                     </Wrapper>
-                    {selectedValue !== "Carrer" && (
+                    {selectedValue !== "Career" && (
                         <Wrapper>
                             <div className={`custom-sel ${kindOpen ? "open" : ""}`}>
                                 <button type="button" onClick={catagoryDropdown}>
@@ -172,7 +172,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                 </button>
                                 <ul className="list">
                                     <li onClick={() => handleCatagory("All")}>
-                                        <button type="button" onClick={() => setItem(Data)}>
+                                        <button type="button" onClick={() => setItem(Data.main)}>
                                             <span>All</span>
                                             <span className="count">{getAllCount}</span>
                                         </button>

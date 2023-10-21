@@ -319,13 +319,3 @@ td {
 select::-ms-expand {
     display: none;
 }
-
-/* 아이폰 button 파란색 없애기*/
-button,
-input[type="button"],
-input[type="submit"],
-input[type="reset"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}

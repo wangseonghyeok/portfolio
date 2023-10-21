@@ -4,20 +4,20 @@ import "./assets/css/style.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/Main";
-import Carrer from "./components/Carrer";
+import Career from "./components/Career";
 import Data from "./data.json";
 
 function App() {
-    const [item, setItem] = useState(Data);
-    const menuItems = [...new Set(Data.map((Val) => Val.category))];
+    const [item, setItem] = useState(Data.main);
+    const menuItems = [...new Set(Data.main.map((Val) => Val.category))];
     const filterItem = (curcat) => {
-        const newItem = Data.filter((newVal) => {
+        const newItem = Data.main.filter((newVal) => {
             return newVal.category === curcat;
         });
         setItem(newItem);
     };
 
-    const getElCount = Data.map((Val) => Val.category);
+    const getElCount = Data.main.map((Val) => Val.category);
     const itemCounts = {};
     menuItems.forEach((category) => {
         const count = getElCount.filter((item) => item.includes(category)).length;
@@ -30,7 +30,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main item={item} />} />
                     <Route path="/project" element={<Main item={item} />} />
-                    <Route path="/carrer" element={<Carrer />} />
+                    <Route path="/career" element={<Career />} />
                 </Routes>
                 <Footer />
             </div>
