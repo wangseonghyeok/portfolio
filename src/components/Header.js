@@ -82,11 +82,9 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const catagoryCloseSelect = (e) => {
         if (kindOpen && (!el.current || !el.current.contains(e.target))) setKindOpen(false);
     };
-    useEffect(() => {
-        window.addEventListener("click", handleCloseSelect);
-        window.addEventListener("click", catagoryCloseSelect);
 
-        /* gnb depth 클릭 시 "width" 값이 가변적으로 바뀔때*/
+    const resizinHeader = () => {
+        /* gnb depth 클릭 시 "width" 값이 가변적으로 바뀔때 */
         const gnb = document.querySelector(".gnb");
         const project = document.querySelector(".project");
         const carrer = document.querySelector(".carrer");
@@ -104,6 +102,12 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         if (divs.length === 3) {
             gnb.style.width = "198.94px";
         }
+    };
+    useEffect(() => {
+        window.addEventListener("click", handleCloseSelect);
+        window.addEventListener("click", catagoryCloseSelect);
+        window.addEventListener("resize", resizinHeader);
+        resizinHeader();
     });
 
     useEffect(() => {

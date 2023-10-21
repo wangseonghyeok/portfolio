@@ -37,6 +37,7 @@ html {
 }
 /* gnb */
 .gnb {
+    width: 481.17px;
     position: fixed;
     height: 72px;
     padding: 0 30px;
@@ -495,6 +496,11 @@ main {
     }
     #footer {
         display: none;
+    }
+}
+@media (min-width: 720px) {
+    .gnb {
+        width: auto !important;
     }
 }
 @keyframes dropdown {

@@ -12,13 +12,12 @@ export default function Carrer() {
         if (mediaQuery.matches) {
             syncHeight();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <Wrapper>
-            {/* <main>
+            <main>
                 <div className="list"></div>
-            </main> */}
+            </main>
         </Wrapper>
     );
 }

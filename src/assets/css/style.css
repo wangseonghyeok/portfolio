@@ -433,6 +433,16 @@ select::-ms-expand {
   display: none;
 }
 
+/* 아이폰 button 파란색 없애기*/
+button,
+input[type=button],
+input[type=submit],
+input[type=reset] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 html {
   font-size: 10px;
 }
@@ -471,6 +481,7 @@ html.is-locked body {
 }
 /* gnb */
 .gnb {
+  width: 481.17px;
   position: fixed;
   height: 72px;
   padding: 0 30px;
@@ -835,6 +846,11 @@ main::-webkit-scrollbar {
   }
   #footer {
     display: none;
+  }
+}
+@media (min-width: 720px) {
+  .gnb {
+    width: auto !important;
   }
 }
 @keyframes dropdown {
