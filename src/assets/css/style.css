@@ -598,7 +598,7 @@ main::-webkit-scrollbar {
 
 .content {
   max-width: 900px;
-  margin: 140px auto 0;
+  margin: 140px auto 80px;
 }
 .content .work {
   display: flex;
@@ -612,7 +612,6 @@ main::-webkit-scrollbar {
   font-size: 20px;
 }
 .content .career {
-  margin-top: 30px;
   display: flex;
   justify-content: space-between;
 }
@@ -635,6 +634,13 @@ main::-webkit-scrollbar {
   transform: translateY(-50%);
   background-color: #fff;
   left: 0px;
+}
+.content .list {
+  margin-top: 30px;
+}
+.content .list + .list {
+  padding-top: 30px;
+  border-top: 1px solid #444;
 }
 .content .title-wrap {
   margin: 25px 0 0 40px;
@@ -915,6 +921,45 @@ main::-webkit-scrollbar {
   }
   #footer {
     display: none;
+  }
+  .content {
+    margin: 12rem auto 3rem;
+    padding: 0 1.3rem;
+  }
+  .content .work > h1 {
+    font-size: 2.8rem;
+  }
+  .content .work > span {
+    padding-left: 0.5rem;
+    font-size: 1.6rem;
+  }
+  .content .career > p {
+    font-size: 2rem;
+  }
+  .content .list {
+    margin-top: 2rem;
+  }
+  .content .business {
+    margin: 1.5rem 0 0 0;
+    font-size: 1.8rem;
+  }
+  .content .title-wrap {
+    margin: 1.5rem 0 0 0rem;
+  }
+  .content .title-wrap .title-bar {
+    font-size: 1.4rem;
+  }
+  .content .title-wrap .title-bar .title {
+    word-break: keep-all;
+    padding-left: 1.6rem;
+  }
+  .content .title-wrap .title-bar .title::after {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+  .content .title-wrap .desc {
+    font-size: 1.4rem;
+    margin: 1rem 0 0 0rem;
   }
 }
 @media (min-width: 720px) {

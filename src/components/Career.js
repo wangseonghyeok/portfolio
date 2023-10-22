@@ -18,12 +18,12 @@ export default function Carrer() {
         <Wrapper>
             <main style={{ borderRadius: "0px" }}>
                 <div className="content">
+                    <div className="work">
+                        <h1>왕성혁 경력기술서</h1> <span>총 경력 3년</span>
+                    </div>
                     {Data.work.map((Val) => {
                         return (
                             <div className="list" key={Val.id}>
-                                <div className="work">
-                                    <h1>왕성혁 경력기술서</h1> <span>총 경력 3년</span>
-                                </div>
                                 <div className="career">
                                     <p className="company">
                                         ※ <strong>{Val.company}</strong> 주임 퍼블리셔
@@ -31,7 +31,7 @@ export default function Carrer() {
                                     <p className="date">{Val.date}</p>
                                 </div>
                                 <p className="business">업무내용</p>
-                                {Val.info.map((data) => {
+                                {[...Val.info].reverse().map((data) => {
                                     return (
                                         <div className="title-wrap" key={data.id}>
                                             <div className="title-bar">
@@ -44,7 +44,7 @@ export default function Carrer() {
                                             <div className="desc">
                                                 {/* {data.desc} */}
                                                 {data.desc.map((name, index) => {
-                                                    return <p key={Val.id + index + 1}>{name}</p>;
+                                                    return <p key={Val.id + index + 1}>- {name}</p>;
                                                 })}
                                             </div>
                                         </div>
