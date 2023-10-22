@@ -183,7 +183,7 @@ main {
     .work {
         display: flex;
         align-items: flex-end;
-        > h1 {
+        > h2 {
             font-size: 46px;
         }
 
@@ -589,11 +589,11 @@ main {
     }
 
     .content {
-        margin: rem(120px auto 30px);
+        margin: rem(105px auto 30px);
         padding: rem(0 13px);
         .work {
-            > h1 {
-                font-size: rem(28px);
+            > h2 {
+                font-size: rem(26px);
             }
             > span {
                 padding-left: rem(5px);
@@ -605,29 +605,41 @@ main {
                 font-size: rem(20px);
             }
         }
-        .list {
-            margin-top: rem(20px);
-        }
         .business {
-            margin: rem(15px 0 0 0);
+            margin: rem(12px 0 0 0);
             font-size: rem(18px);
         }
         .title-wrap {
-            margin: rem(15px 0 0 0px);
+            margin: rem(12px 0 0 0px);
             .title-bar {
                 font-size: rem(14px);
                 .title {
+                    line-height: 1.3;
+                    width: 65%;
                     word-break: keep-all;
                     padding-left: rem(16px);
                     &::after {
+                        top: rem(9px);
                         width: rem(6px);
                         height: rem(6px);
                     }
                 }
+                .date {
+                    display: flex;
+
+                    width: 35%;
+                    justify-content: space-between;
+                }
             }
             .desc {
                 font-size: rem(14px);
-                margin: rem(10px 0 0 0px);
+                margin: rem(8px 0 0 0px);
+            }
+        }
+        .list {
+            margin-top: rem(25px);
+            + .list {
+                padding-top: rem(25px);
             }
         }
     }

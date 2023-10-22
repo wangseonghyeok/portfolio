@@ -604,7 +604,7 @@ main::-webkit-scrollbar {
   display: flex;
   align-items: flex-end;
 }
-.content .work > h1 {
+.content .work > h2 {
   font-size: 46px;
 }
 .content .work > span {
@@ -923,11 +923,11 @@ main::-webkit-scrollbar {
     display: none;
   }
   .content {
-    margin: 12rem auto 3rem;
+    margin: 10.5rem auto 3rem;
     padding: 0 1.3rem;
   }
-  .content .work > h1 {
-    font-size: 2.8rem;
+  .content .work > h2 {
+    font-size: 2.6rem;
   }
   .content .work > span {
     padding-left: 0.5rem;
@@ -936,30 +936,41 @@ main::-webkit-scrollbar {
   .content .career > p {
     font-size: 2rem;
   }
-  .content .list {
-    margin-top: 2rem;
-  }
   .content .business {
-    margin: 1.5rem 0 0 0;
+    margin: 1.2rem 0 0 0;
     font-size: 1.8rem;
   }
   .content .title-wrap {
-    margin: 1.5rem 0 0 0rem;
+    margin: 1.2rem 0 0 0rem;
   }
   .content .title-wrap .title-bar {
     font-size: 1.4rem;
   }
   .content .title-wrap .title-bar .title {
+    line-height: 1.3;
+    width: 65%;
     word-break: keep-all;
     padding-left: 1.6rem;
   }
   .content .title-wrap .title-bar .title::after {
+    top: 0.9rem;
     width: 0.6rem;
     height: 0.6rem;
   }
+  .content .title-wrap .title-bar .date {
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+  }
   .content .title-wrap .desc {
     font-size: 1.4rem;
-    margin: 1rem 0 0 0rem;
+    margin: 0.8rem 0 0 0rem;
+  }
+  .content .list {
+    margin-top: 2.5rem;
+  }
+  .content .list + .list {
+    padding-top: 2.5rem;
   }
 }
 @media (min-width: 720px) {

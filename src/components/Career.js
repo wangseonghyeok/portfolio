@@ -19,7 +19,7 @@ export default function Carrer() {
             <main style={{ borderRadius: "0px" }}>
                 <div className="content">
                     <div className="work">
-                        <h1>왕성혁 경력기술서</h1> <span>총 경력 3년</span>
+                        <h2>왕성혁 경력기술서</h2> <span>총 경력 3년</span>
                     </div>
                     {Data.work.map((Val) => {
                         return (
@@ -39,12 +39,15 @@ export default function Carrer() {
                                                     {data.title}
                                                     <span> | 퍼블리싱 기여도 {data.percent}</span>
                                                 </p>
-                                                <p className="date">{data.date}</p>
+                                                <p className="date">
+                                                    <span></span>
+                                                    <span>{data.date}</span>
+                                                </p>
                                             </div>
                                             <div className="desc">
                                                 {/* {data.desc} */}
-                                                {data.desc.map((name, index) => {
-                                                    return <p key={Val.id + index + 1}>- {name}</p>;
+                                                {data.desc.map((post, num) => {
+                                                    return <p key={Val.id + num + 1}>- {post}</p>;
                                                 })}
                                             </div>
                                         </div>
