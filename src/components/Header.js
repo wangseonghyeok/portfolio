@@ -55,6 +55,18 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         }, 50);
     }
 
+    function handleTop() {
+        const catagorySelect = document.querySelectorAll(".select");
+        let mainTop = document.querySelector(".sub-section .list");
+
+        for (const catagorySelects of catagorySelect) {
+            catagorySelects.addEventListener("click", function (e) {
+                if (window.innerWidth <= 720) {
+                    mainTop.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            });
+        }
+    }
     let getAllCount = Data.main.length;
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -107,6 +119,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         window.addEventListener("click", handleCloseSelect);
         window.addEventListener("click", catagoryCloseSelect);
         window.addEventListener("resize", resizinHeader);
+        window.addEventListener("resize", handleTop);
         resizinHeader();
     });
 
@@ -171,7 +184,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                     )}{" "}
                                 </button>
                                 <ul className="list">
-                                    <li onClick={() => handleCatagory("All")}>
+                                    <li onClick={() => handleCatagory("All")} className="select">
                                         <button type="button" onClick={() => setItem(Data.main)}>
                                             <span>All</span>
                                             <span className="count">{getAllCount}</span>
@@ -179,7 +192,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                     </li>
                                     {menuItems.map((Val, id) => {
                                         return (
-                                            <li onClick={() => handleCatagory(Val)} key={id}>
+                                            <li onClick={() => handleCatagory(Val)} key={id} className="select">
                                                 <button type="button" onClick={() => filterItem(Val)}>
                                                     <span>{Val}</span>
                                                     <span className="count">{itemCounts[Val]}</span>
