@@ -103,7 +103,8 @@ a {
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
-  text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
 }
 
 b,
@@ -168,7 +169,8 @@ button,
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;
-  appearance: button;
+  -moz-appearance: button;
+       appearance: button;
 }
 
 button::-moz-focus-inner,
@@ -216,13 +218,15 @@ textarea {
 [type=number]::-webkit-inner-spin-button,
 [type=number]::-webkit-outer-spin-button {
   height: auto;
-  appearance: none;
+  -webkit-appearance: none;
+          appearance: none;
   margin: 0;
 }
 
 [type=search] {
   -webkit-appearance: textfield;
-  appearance: textfield;
+  -moz-appearance: textfield;
+       appearance: textfield;
   outline-offset: -2px;
 }
 
@@ -291,7 +295,9 @@ blockquote,
 iframe {
   margin: 0;
   padding: 0;
-  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+          text-size-adjust: 100%;
 }
 
 article,
@@ -355,7 +361,8 @@ caption {
   width: 1px;
   height: 1px;
   clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   clear: both;
 }
 
@@ -406,13 +413,17 @@ select {
 
 textarea {
   resize: none;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 label {
   cursor: pointer;
   -webkit-touch-callout: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 label img {
   pointer-events: none;
@@ -471,7 +482,7 @@ html.is-locked body {
 }
 /* gnb */
 .gnb {
-  width: 481.17px;
+  width: 480px;
   position: fixed;
   height: 72px;
   padding: 0 30px;
@@ -482,7 +493,8 @@ html.is-locked body {
   display: flex;
   border-radius: 40px;
   background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   transition: left 0.5s, top 0.5s, transform 0.5s, width 0.5s;
 }
 
@@ -530,7 +542,8 @@ main::-webkit-scrollbar {
 .main-section .sub-section .list .pf-list-item .pf-list-inner .pf-img > img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   background: #000;
   transition: transform 0.5s;
 }
@@ -838,7 +851,6 @@ main::-webkit-scrollbar {
   .gnb {
     height: 6.2rem;
     padding: 0 2rem;
-    width: 32rem;
   }
   .gnb .row-sel .name {
     font-size: 2.4rem;
