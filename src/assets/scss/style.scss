@@ -644,11 +644,11 @@ main {
         }
     }
 }
-@media (min-width: 720px) {
-    .gnb {
-        width: auto !important;
-    }
-}
+// @media (min-width: 720px) {
+//     .gnb {
+//         width: auto !important;
+//     }
+// }
 @keyframes dropdown {
     0% {
         transform: translateY(-8%);

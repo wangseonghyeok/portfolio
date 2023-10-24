@@ -21,6 +21,7 @@ export default function Carrer() {
                     <div className="work">
                         <h2>왕성혁 경력기술서</h2> <span>총 경력 3년</span>
                     </div>
+
                     {Data.work.map((Val) => {
                         return (
                             <div className="list" key={Val.id}>

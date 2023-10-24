@@ -973,11 +973,6 @@ main::-webkit-scrollbar {
     padding-top: 2.5rem;
   }
 }
-@media (min-width: 720px) {
-  .gnb {
-    width: auto !important;
-  }
-}
 @keyframes dropdown {
   0% {
     transform: translateY(-8%);

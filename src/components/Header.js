@@ -11,6 +11,9 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     const [scroll, setScroll] = useState(false);
     let prevScroll = 0;
     let timer;
+    let getAllCount = Data.main.length;
+
+    // const divs = gnb.querySelectorAll("div");
     //새로고침 시 LocalStorage 데이터 유지
     function saveSelectedValueToLocalStorage(value) {
         localStorage.setItem("selectedValue", value);
@@ -29,12 +32,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             if (prevScroll > currScroll) {
                 timer = setTimeout(() => {
                     setScroll(false);
-                    // console.log("위로");
                 }, 20);
             } else {
                 timer = setTimeout(() => {
                     setScroll(true);
-                    // console.log("아래");
                 }, 20);
             }
             prevScroll = currScroll;
@@ -51,12 +52,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                 if (window.innerWidth <= 720) {
                     if (prevScroll > currScroll) {
                         timer = setTimeout(() => {
-                            // console.log("위로");
                             setScroll(false);
                         }, 20);
                     } else {
                         timer = setTimeout(() => {
-                            // console.log("아래");
                             setScroll(true);
                         }, 20);
                     }
@@ -82,7 +81,49 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             });
         }
     }
-    let getAllCount = Data.main.length;
+
+    // function mobileCareerClickHandler() {
+    //     let gnb = document.querySelector(".gnb");
+    //     let divs = gnb.querySelectorAll("div");
+
+    //     gnb.style.width = window.innerWidth <= 720 && divs.length === 3 ? "198.94px" : "310px";
+    //     console.log("3개");
+    // }
+
+    function projectClickHandler() {
+        let gnb = document.querySelector(".gnb");
+        gnb.style.width = window.innerWidth >= 720 ? "481.16px" : "320px";
+    }
+
+    function careerClickHandler() {
+        let gnb = document.querySelector(".gnb");
+        gnb.style.width = window.innerWidth >= 720 ? "320px" : "198.94px";
+    }
+
+    function addEventListeners() {
+        let project = document.querySelector(".project");
+        let career = document.querySelector(".career");
+        let home = document.querySelector(".name");
+        project.addEventListener("click", projectClickHandler);
+        career.addEventListener("click", careerClickHandler);
+        // career.addEventListener("click", mobileCareerClickHandler);
+        home.addEventListener("click", projectClickHandler);
+    }
+    function removeEventListeners() {
+        let project = document.querySelector(".project");
+        let career = document.querySelector(".career");
+        let home = document.querySelector(".name");
+        project.removeEventListener("click", projectClickHandler);
+        career.removeEventListener("click", careerClickHandler);
+        home.removeEventListener("click", projectClickHandler);
+    }
+    function updateEventListeners() {
+        addEventListeners();
+        if (window.innerWidth >= 720) {
+        } else {
+            // removeEventListeners();
+        }
+    }
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -110,38 +151,59 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         if (kindOpen && (!el.current || !el.current.contains(e.target))) setKindOpen(false);
     };
 
-    const resizinHeader = () => {
-        /* gnb depth 클릭 시 "width" 값이 가변적으로 바뀔때 */
-        const gnb = document.querySelector(".gnb");
-        const project = document.querySelector(".project");
-        const career = document.querySelector(".career");
-        const name = document.querySelector(".name");
-        const divs = gnb.querySelectorAll("div");
-        project.addEventListener("click", function () {
-            gnb.style.width = "320px";
-        });
-        name.addEventListener("click", function () {
-            gnb.style.width = "320px";
-        });
-        career.addEventListener("click", function () {
-            gnb.style.width = "198.94px";
-        });
-        if (divs.length === 3) {
-            gnb.style.width = "198.94px";
-        }
-    };
+    // const resizinHeader = () => {
+    //     /* gnb depth 클릭 시 "width" 값이 가변적으로 바뀔때 */
+
+    //     const gnb = document.querySelector(".gnb");
+    //     const project = document.querySelector(".project");
+    //     const career = document.querySelector(".career");
+    //     const name = document.querySelector(".name");
+    //     const divs = gnb.querySelectorAll("div");
+    //     if (window.innerWidth <= 720) {
+    //         project.addEventListener("click", () => {
+    //             gnb.style.width = "320px";
+    //         });
+    //         name.addEventListener("click", () => {
+    //             gnb.style.width = "320px";
+    //         });
+    //         career.addEventListener("click", () => {
+    //             gnb.style.width = "198.94px";
+    //         });
+    //         if (divs.length === 3) {
+    //             gnb.style.width = "198.94px";
+    //         }
+    //     }
+    //     if (window.innerWidth >= 720) {
+    //         project.addEventListener("click", () => {
+    //             gnb.style.width = "481.16px";
+    //             return;
+    //         });
+    //         career.addEventListener("click", () => {
+    //             gnb.style.width = "310px";
+    //         });
+    //     }
+    // };
     useEffect(() => {
+        const gnb = document.querySelector(".gnb");
+        const divs = gnb.querySelectorAll("div");
+        console.log(divs);
         window.addEventListener("click", handleCloseSelect);
         window.addEventListener("click", catagoryCloseSelect);
-        resizinHeader();
+        // window.addEventListener("resize", resizinHeader);
+        // resizinHeader();
         handleTop();
+
+        updateEventListeners();
+        window.addEventListener("resize", updateEventListeners);
     });
 
     useEffect(() => {
-        let currentScrollY = document.querySelector(".sub-section .list");
-        currentScrollY.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
+        window.onload = function () {
+            let currentScrollY = document.querySelector(".sub-section .list");
+            currentScrollY.addEventListener("scroll", handleScroll);
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+            };
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setScroll]);
