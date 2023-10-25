@@ -3,7 +3,7 @@ export default function Footer() {
         <footer id="footer">
             <ul>
                 <li>
-                    <a href="/images/" target="_blank" className="download">
+                    <a href="/portfolio/assets/pdf/resume.pdf" target="_blank" className="download">
                         Resume
                     </a>
                 </li>
@@ -13,7 +13,7 @@ export default function Footer() {
                     </a>
                 </li>
             </ul>
-            <span>Updated Oct 21, 2023.</span>
+            <span>Updated Oct 25, 2023.</span>
         </footer>
     );
 }
