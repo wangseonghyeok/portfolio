@@ -31,12 +31,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             if (prevScroll > currScroll) {
                 timer = setTimeout(() => {
                     setScroll(false);
-                    //   console.log("위로");
                 }, 20);
             } else {
                 timer = setTimeout(() => {
                     setScroll(true);
-                    //   console.log("아래");
                 }, 20);
             }
             prevScroll = currScroll;
@@ -54,12 +52,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                     if (prevScroll > currScroll) {
                         timer = setTimeout(() => {
                             setScroll(false);
-                            console.log("위로");
                         }, 20);
                     } else {
                         timer = setTimeout(() => {
                             setScroll(true);
-                            console.log("아래");
                         }, 20);
                     }
                     prevScroll = currScroll;
