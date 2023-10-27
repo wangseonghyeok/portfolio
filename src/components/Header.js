@@ -64,21 +64,22 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         }, 25);
     }
 
-    function handleTop() {
-        if (timer) {
-            clearTimeout(timer);
-        }
+    function handleTop(ms) {
         const catagorySelect = document.querySelectorAll(".select");
         let mainTop = document.querySelector(".sub-section .list");
         for (const catagorySelects of catagorySelect) {
             catagorySelects.addEventListener("click", function () {
                 mainTop.scrollTo({ top: 0, behavior: "smooth" });
-                timer = setTimeout(() => {
-                    let gnb = document.querySelector(".gnb");
-                    gnb.classList.remove("minimized");
-                }, 1000);
+
+                let gnb = document.querySelector(".gnb");
+                gnb.classList.remove("minimized");
             });
         }
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    async function process() {
+        await handleTop(1000);
     }
     function projectClickHandler() {
         let gnb = document.querySelector(".gnb");
@@ -132,7 +133,6 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         window.addEventListener("click", handleCloseSelect);
         window.addEventListener("click", catagoryCloseSelect);
         window.addEventListener("resize", projectClickHandler);
-        handleTop();
     });
 
     useEffect(() => {
@@ -154,7 +154,6 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                         onClick={() => {
                             handleSelect("Project");
                             reRender();
-                            handleTop();
                         }}
                     >
                         Wang
@@ -170,7 +169,6 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                     onClick={() => {
                                         handleSelect("Project");
                                         reRender();
-                                        handleTop();
                                     }}
                                 >
                                     <Link to="/project">Project</Link>
@@ -198,15 +196,28 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                 </button>
                                 <ul className="list">
                                     <li onClick={() => handleCatagory("All")} className="select">
-                                        <button type="button" onClick={() => setItem(Data.main)}>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setItem(Data.main);
+                                                process();
+                                            }}
+                                        >
                                             <span>All</span>
+
                                             <span className="count">{getAllCount}</span>
                                         </button>
                                     </li>
                                     {menuItems.map((Val, id) => {
                                         return (
                                             <li onClick={() => handleCatagory(Val)} key={id} className="select">
-                                                <button type="button" onClick={() => filterItem(Val)}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        filterItem(Val);
+                                                        process();
+                                                    }}
+                                                >
                                                     <span>{Val}</span>
                                                     <span className="count">{itemCounts[Val]}</span>
                                                 </button>
