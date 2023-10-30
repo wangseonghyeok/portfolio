@@ -14,8 +14,12 @@ export default function Main({ item }) {
     };
     useEffect(() => {
         window.addEventListener("resize", resizingHandler);
+
         const mediaQuery = window.matchMedia("screen and (max-width: 720px)");
+        // let grid = document.querySelector(".list");
+
         if (mediaQuery.matches) {
+            // grid.classList.remove("grid");
             setisMobile(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,7 +37,7 @@ export default function Main({ item }) {
                                         <div className="pf-list-item" key={Val.id}>
                                             <div className="pf-list-inner">
                                                 <a href={Val.link} target="_blank" className="pf-img" rel="noreferrer">
-                                                    <img src={Val.img} alt="img" loading="lazy"></img>
+                                                    <img src={Val.img} alt="img"></img>
                                                 </a>
                                                 <div className="pf-info">
                                                     <div className="pf-info-bottom">
