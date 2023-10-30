@@ -16,10 +16,10 @@ export default function Main({ item }) {
         window.addEventListener("resize", resizingHandler);
 
         const mediaQuery = window.matchMedia("screen and (max-width: 720px)");
-        // let grid = document.querySelector(".list");
+        let grid = document.querySelector(".list");
 
         if (mediaQuery.matches) {
-            // grid.classList.remove("grid");
+            grid.classList.remove("grid");
             setisMobile(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

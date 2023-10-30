@@ -22,25 +22,25 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     }
 
     function handleScroll() {
-        if (timer) {
-            clearTimeout(timer);
-        }
-        let mainScrollY = document.querySelector(".sub-section .list");
-        const currScroll = mainScrollY.scrollTop;
-        if (window.innerWidth <= 720) {
-            if (prevScroll > currScroll) {
-                timer = setTimeout(() => {
-                    setScroll(false);
-                }, 20);
-            } else {
-                timer = setTimeout(() => {
-                    setScroll(true);
-                }, 20);
-            }
-            prevScroll = currScroll;
-        }
-    }
-    function reRender() {
+        // if (timer) {
+        //     clearTimeout(timer);
+        // }
+        // let mainScrollY = document.querySelector(".sub-section .list");
+        // const currScroll = mainScrollY.scrollTop;
+        // if (window.innerWidth <= 720) {
+        //     if (prevScroll > currScroll) {
+        //         timer = setTimeout(() => {
+        //             console.log("위");
+        //             setScroll(false);
+        //         }, 20);
+        //     } else {
+        //         timer = setTimeout(() => {
+        //             console.log("아래");
+        //             setScroll(true);
+        //         }, 20);
+        //     }
+        //     prevScroll = currScroll;
+        // }
         setTimeout(() => {
             let currentScrollY = document.querySelector(".sub-section .list");
             currentScrollY.addEventListener("scroll", function () {
@@ -62,32 +62,90 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                 }
             });
         }, 25);
+        if (timer) {
+            clearTimeout(timer);
+        }
+        let mainScrollY = document.querySelector(".sub-section .list");
+        const currScroll = mainScrollY.scrollTop;
+        if (window.innerWidth <= 720) {
+            if (prevScroll > currScroll) {
+                timer = setTimeout(() => {
+                    setScroll(false);
+                }, 20);
+            } else {
+                timer = setTimeout(() => {
+                    setScroll(true);
+                }, 20);
+            }
+            prevScroll = currScroll;
+        }
     }
+    // function reRender() {
+    //     setTimeout(() => {
+    //         let currentScrollY = document.querySelector(".sub-section .list");
+    //         currentScrollY.addEventListener("scroll", function () {
+    //             if (timer) {
+    //                 clearTimeout(timer);
+    //             }
+    //             const currScroll = this.scrollTop;
+    //             if (window.innerWidth <= 720) {
+    //                 if (prevScroll > currScroll) {
+    //                     timer = setTimeout(() => {
+    //                         setScroll(false);
+    //                     }, 20);
+    //                 } else {
+    //                     timer = setTimeout(() => {
+    //                         setScroll(true);
+    //                     }, 20);
+    //                 }
+    //                 prevScroll = currScroll;
+    //             }
+    //         });
+    //     }, 25);
+    //     if (timer) {
+    //         clearTimeout(timer);
+    //     }
+    //     let mainScrollY = document.querySelector(".sub-section .list");
+    //     const currScroll = mainScrollY.scrollTop;
+    //     if (window.innerWidth <= 720) {
+    //         if (prevScroll > currScroll) {
+    //             timer = setTimeout(() => {
+    //                 setScroll(false);
+    //             }, 20);
+    //         } else {
+    //             timer = setTimeout(() => {
+    //                 setScroll(true);
+    //             }, 20);
+    //         }
+    //         prevScroll = currScroll;
+    //     }
+    // }
     function syncHeight() {
         document.documentElement.style.setProperty("--window-inner-height", `${window.innerHeight}px`);
     }
     function handleTop(ms) {
-        const catagorySelect = document.querySelectorAll(".select");
+        let catagorySelect = document.querySelectorAll(".select");
         let mainTop = document.querySelector(".sub-section .list");
-        for (const catagorySelects of catagorySelect) {
-            catagorySelects.addEventListener("click", function () {
-                mainTop.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(() => {
+            if (window.innerWidth >= 720) {
+                catagorySelect.forEach(() => {
+                    mainTop.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            } else {
+                setScroll(false);
+            }
+        }, 150);
 
-                let gnb = document.querySelector(".gnb");
-                gnb.classList.remove("minimized");
-            });
-        }
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
-
     async function process() {
         await handleTop(1000);
     }
     function projectClickHandler() {
-        const gnb = document.querySelector(".gnb");
-        const rowSel = document.querySelectorAll(".custom-sel");
-        const selCount = rowSel.length;
-        const windowWidth = window.innerWidth;
+        let gnb = document.querySelector(".gnb");
+        let rowSel = document.querySelectorAll(".custom-sel");
+        let selCount = rowSel.length;
+        let windowWidth = window.innerWidth;
 
         if (windowWidth >= 720 && selCount === 2) {
             gnb.style.width = "480px";
@@ -99,13 +157,6 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             gnb.style.width = "198px";
         } else {
             gnb.removeAttribute("style");
-        }
-
-        //mobile 최상단 0 일 때 minimized(setScroll === false '삭제')
-        let mainScrollY = document.querySelector(".sub-section .list");
-        const currScroll = mainScrollY.scrollTop;
-        if (currScroll === 0) {
-            setScroll(false);
         }
     }
 
@@ -143,13 +194,20 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         window.addEventListener("click", catagoryCloseSelect);
         window.addEventListener("resize", projectClickHandler);
         window.addEventListener("resize", syncHeight);
+
+        return () => {
+            window.removeEventListener("click", handleCloseSelect);
+            window.removeEventListener("click", catagoryCloseSelect);
+            window.removeEventListener("resize", projectClickHandler);
+            window.removeEventListener("resize", syncHeight);
+        };
     });
 
     useEffect(() => {
         let currentScrollY = document.querySelector(".sub-section .list");
         currentScrollY.addEventListener("scroll", handleScroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            currentScrollY.removeEventListener("scroll", handleScroll);
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,7 +222,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                         className="name"
                         onClick={() => {
                             handleSelect("Project");
-                            reRender();
+                            handleScroll();
                         }}
                     >
                         Wang
@@ -179,7 +237,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                     className="project"
                                     onClick={() => {
                                         handleSelect("Project");
-                                        reRender();
+                                        handleScroll();
                                     }}
                                 >
                                     <Link to="/project">Project</Link>

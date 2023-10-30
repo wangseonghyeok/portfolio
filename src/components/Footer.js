@@ -13,7 +13,7 @@ export default function Footer() {
                     </a>
                 </li>
             </ul>
-            <span>Updated Oct 25, 2023.</span>
+            <span>Updated Oct 30, 2023.</span>
         </footer>
     );
 }
