@@ -65,8 +65,11 @@ main {
 .main-section {
     .sub-section {
         .list {
+            height: calc(var(--window-inner-height));
             overflow-y: auto;
             scroll-snap-type: y mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
             &.grid {
                 display: grid;
                 scroll-snap-type: none;
@@ -167,6 +170,9 @@ main {
                         }
                     }
                 }
+            }
+            &::-webkit-scrollbar {
+                display: none;
             }
         }
     }
@@ -463,7 +469,7 @@ main {
     .gnb {
         height: rem(62px);
         padding: rem(0 20px);
-        // width: rem(320px);
+
         .row-sel {
             .name {
                 font-size: rem(24px);
@@ -543,7 +549,7 @@ main {
                 padding-top: rem(10px);
             }
         }
-        height: calc(var(--window-inner-height));
+        // height: calc(var(--window-inner-height));
         .pf-list-item {
             .pf-list-inner {
                 .pf {

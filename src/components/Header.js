@@ -63,7 +63,9 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             });
         }, 25);
     }
-
+    function syncHeight() {
+        document.documentElement.style.setProperty("--window-inner-height", `${window.innerHeight}px`);
+    }
     function handleTop(ms) {
         const catagorySelect = document.querySelectorAll(".select");
         let mainTop = document.querySelector(".sub-section .list");
@@ -82,10 +84,10 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         await handleTop(1000);
     }
     function projectClickHandler() {
-        let gnb = document.querySelector(".gnb");
-        let rowSel = document.querySelectorAll(".custom-sel");
-        let selCount = rowSel.length;
-        var windowWidth = window.innerWidth;
+        const gnb = document.querySelector(".gnb");
+        const rowSel = document.querySelectorAll(".custom-sel");
+        const selCount = rowSel.length;
+        const windowWidth = window.innerWidth;
 
         if (windowWidth >= 720 && selCount === 2) {
             gnb.style.width = "480px";
@@ -97,6 +99,13 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             gnb.style.width = "198px";
         } else {
             gnb.removeAttribute("style");
+        }
+
+        //mobile 최상단 0 일 때 minimized(setScroll === false '삭제')
+        let mainScrollY = document.querySelector(".sub-section .list");
+        const currScroll = mainScrollY.scrollTop;
+        if (currScroll === 0) {
+            setScroll(false);
         }
     }
 
@@ -128,11 +137,12 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     };
 
     useEffect(() => {
+        syncHeight();
         projectClickHandler();
-
         window.addEventListener("click", handleCloseSelect);
         window.addEventListener("click", catagoryCloseSelect);
         window.addEventListener("resize", projectClickHandler);
+        window.addEventListener("resize", syncHeight);
     });
 
     useEffect(() => {
@@ -141,6 +151,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setScroll]);
 

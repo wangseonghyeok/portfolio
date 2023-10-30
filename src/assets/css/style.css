@@ -499,8 +499,11 @@ main::-webkit-scrollbar {
 }
 
 .main-section .sub-section .list {
+  height: calc(var(--window-inner-height));
   overflow-y: auto;
   scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .main-section .sub-section .list.grid {
   display: grid;
@@ -589,6 +592,9 @@ main::-webkit-scrollbar {
 }
 .main-section .sub-section .list .pf-list-item .pf-list-inner .pf-info-bottom .project-skill > span + span {
   margin-left: 4px;
+}
+.main-section .sub-section .list::-webkit-scrollbar {
+  display: none;
 }
 
 /* sub page*/
@@ -883,9 +889,6 @@ main::-webkit-scrollbar {
     border-radius: 2rem;
     border-left-width: 0;
     border-right-width: 0;
-  }
-  .main-section .sub-section .list {
-    height: calc(var(--window-inner-height));
   }
   .main-section .sub-section .list > div {
     height: 100%;
