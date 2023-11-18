@@ -38,7 +38,10 @@ export default function Carrer() {
                         <div className="title-bar">
                           <p className="title">
                             {data.title}
-                            <span> | 퍼블리싱 기여도 {data.percent}</span>
+                            <span>
+                              {" "}
+                              | 작업자수{data.count}명 | 기여도 {data.percent}
+                            </span>
                           </p>
                           <p className="date">
                             <span></span>
