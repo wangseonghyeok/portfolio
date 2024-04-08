@@ -16,7 +16,7 @@ export default function Carrer() {
     }, []);
     return (
         <Wrapper>
-            <main style={{ borderRadius: '0px' }}>
+            <main style={{ borderRadius: '0px' }} className="main">
                 <div className="content">
                     <div className="work">
                         <h2>왕성혁 경력기술서</h2> <span>총 경력 3년</span>

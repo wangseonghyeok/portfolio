@@ -13,7 +13,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
     let prevScroll = 0;
     let timer;
     let getAllCount = Data.main.length;
-
+    let el = useRef();
     //새로고침 시 LocalStorage 데이터 유지
     function saveSelectedValueToLocalStorage(value) {
         localStorage.setItem('selectedValue', value);
@@ -28,21 +28,29 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         }
         let mainScrollY = document.querySelector('.sub-section .list');
         const currScroll = mainScrollY.scrollTop;
+        // 모바일 헤더 영역
         if (window.innerWidth <= 720) {
             if (prevScroll > currScroll) {
                 timer = setTimeout(() => {
-                    console.log('위');
                     setScroll(false);
                 }, 20);
             } else {
                 timer = setTimeout(() => {
-                    console.log('아래');
                     setScroll(true);
                 }, 20);
             }
+
             prevScroll = currScroll;
         }
 
+        // 화면 헤더 영역
+        if (window.innerWidth >= 720) {
+            if (prevScroll > currScroll) {
+                setHeader(isHeader);
+            } else {
+                setHeader(!isHeader);
+            }
+        }
         //스크롤 시 드롭다운 삭제
         if (prevScroll > currScroll) {
             setKindOpen(kindOpen);
@@ -53,24 +61,77 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         }
         prevScroll = currScroll;
     }
+    function handleBeforeUnload() {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        setTimeout(() => {
+            let subPageScrollY = document.querySelector('main');
+            //경력페이지 스크롤시 드롭다운 제거 및 스크롤 무빙
 
+            let subScroll = subPageScrollY.scrollTop;
+            if (prevScroll > subScroll) {
+                if (isOpen) {
+                    setIsOpen(!isOpen);
+                }
+            } else {
+                if (isOpen) {
+                    setIsOpen(!isOpen);
+                }
+            }
+
+            // 화면 헤더 영역 숨기기
+            if (window.innerWidth >= 720) {
+                if (prevScroll > subScroll) {
+                    timer = setTimeout(() => {
+                        if (isHeader) {
+                            setHeader(isHeader);
+                            console.log('1');
+                        }
+                    }, 1000);
+                } else {
+                    timer = setTimeout(() => {
+                        if (isHeader) {
+                            setHeader(!isHeader);
+                            console.log('2');
+                        }
+                    }, 1000);
+                }
+            }
+
+            prevScroll = subScroll;
+        }, 1000);
+    }
     // 클릭 시 다시 랜더링
     function reRender() {
         setTimeout(() => {
             let currentScrollY = document.querySelector('.sub-section .list');
-            let subPageScrollY = document.querySelector('main');
+            // let subPageScrollY = document.querySelector('main');
 
-            //경력페이지 스크롤시 드롭다운 제거
-            subPageScrollY.addEventListener('scroll', function () {
-                let subScroll = subPageScrollY.scrollTop
-                if (prevScroll > subScroll) {
-                    setIsOpen(!isOpen);
-                } else {
-                    setIsOpen(!isOpen);
-                }
-                prevScroll = subScroll;
-            })
+            // //경력페이지 스크롤시 드롭다운 제거 및 스크롤 무빙
+            // subPageScrollY.addEventListener('scroll', function () {
+            //     let subScroll = subPageScrollY.scrollTop;
+            //     if (prevScroll > subScroll) {
+            //         setIsOpen(!isOpen);
+            //     } else {
+            //         setIsOpen(!isOpen);
+            //     }
 
+            //     // 화면 헤더 영역 숨기기
+            //     if (window.innerWidth >= 720) {
+            //         if (prevScroll > subScroll) {
+            //             timer = setTimeout(() => {
+            //                 setHeader(isHeader);
+            //             }, 100);
+            //         } else {
+            //             timer = setTimeout(() => {
+            //                 setHeader(!isHeader);
+            //             }, 100);
+            //         }
+            //     }
+
+            //     prevScroll = subScroll;
+            // });
 
             currentScrollY.addEventListener('scroll', function () {
                 if (timer) {
@@ -92,6 +153,18 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                     prevScroll = currScroll;
                 }
 
+                // 화면 헤더 영역 숨기기
+                if (window.innerWidth >= 720) {
+                    if (prevScroll > currScroll) {
+                        timer = setTimeout(() => {
+                            setHeader(isHeader);
+                        }, 100);
+                    } else {
+                        timer = setTimeout(() => {
+                            setHeader(!isHeader);
+                        }, 100);
+                    }
+                }
                 //스크롤 시 드롭다운 삭제
                 if (prevScroll > currScroll) {
                     timer = setTimeout(() => {
@@ -154,6 +227,7 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             gnb.removeAttribute('style');
         }
     }
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
         if (kindOpen) {
@@ -179,13 +253,49 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
             setKindOpen(!kindOpen);
         }
     };
-    const el = useRef();
     const handleCloseSelect = (e) => {
         if (isOpen && (!el.current || !el.current.contains(e.target))) setIsOpen(false);
     };
     const catagoryCloseSelect = (e) => {
         if (kindOpen && (!el.current || !el.current.contains(e.target))) setKindOpen(false);
     };
+    // useEffect(() => {
+    //     const handleBeforeUnload = () => {
+    //         let subPageScrollY = document.querySelector('main');
+    //         //경력페이지 스크롤시 드롭다운 제거 및 스크롤 무빙
+    //         console.log('페이지가 새로고침되었습니다!');
+    //         let subScroll = subPageScrollY.scrollTop;
+    //         if (prevScroll > subScroll) {
+    //             setIsOpen(isOpen);
+    //         } else {
+    //             setIsOpen(isOpen);
+    //         }
+
+    //         // 화면 헤더 영역 숨기기
+    //         if (window.innerWidth >= 720) {
+    //             if (prevScroll > subScroll) {
+    //                 // eslint-disable-next-line react-hooks/exhaustive-deps
+    //                 timer = setTimeout(() => {
+    //                     setHeader(isHeader);
+    //                     console.log('1');
+    //                 }, 100);
+    //             } else {
+    //                 timer = setTimeout(() => {
+    //                     setHeader(!isHeader);
+    //                     console.log('2');
+    //                 }, 100);
+    //             }
+    //         }
+
+    //         prevScroll = subScroll;
+    //     };
+    //     handleBeforeUnload();
+    //     window.addEventListener('beforeunload', handleBeforeUnload);
+
+    //     return () => {
+    //         window.removeEventListener('beforeunload', handleBeforeUnload);
+    //     };
+    // }, []);
 
     useEffect(() => {
         syncHeight();
@@ -193,7 +303,6 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         window.addEventListener('click', handleCloseSelect);
         window.addEventListener('click', catagoryCloseSelect);
         window.addEventListener('resize', projectClickHandler);
-
         return () => {
             window.removeEventListener('click', handleCloseSelect);
             window.removeEventListener('click', catagoryCloseSelect);
@@ -206,11 +315,23 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
         let currentScrollY = document.querySelector('.sub-section .list');
         currentScrollY.addEventListener('scroll', handleScroll);
         return () => {
+            handleScroll();
             currentScrollY.removeEventListener('scroll', handleScroll);
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setScroll]);
+
+    useEffect(() => {
+        let currentScrollY = document.querySelector('main');
+        currentScrollY.addEventListener('scroll', handleBeforeUnload);
+        handleBeforeUnload();
+        return () => {
+            currentScrollY.removeEventListener('scroll', handleBeforeUnload);
+        };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setHeader]);
 
     return (
         <header id="header" className={`header ${isHeader ? 'has-transform' : ''}`} ref={el}>
