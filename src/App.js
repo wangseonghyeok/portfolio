@@ -34,6 +34,7 @@ function App() {
                 </Routes>
                 <Footer />
             </div>
+            <div className="dim"></div>
         </BrowserRouter>
     );
 }
