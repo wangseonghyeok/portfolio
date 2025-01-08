@@ -19,7 +19,12 @@ export default function Carrer() {
             <main style={{ borderRadius: '0px' }} className="main">
                 <div className="content">
                     <div className="work">
-                        <h2>왕성혁 경력기술서</h2> <span>총 경력 3년</span>
+                        <div>
+                            <h2>왕성혁 경력기술서</h2> <span>총 경력 4년 </span>
+                        </div>
+                        <a className="btn-view" target="_blank" href="https://github.com/wangseonghyeok/portfolio">
+                            README
+                        </a>
                     </div>
                     <div className="sub-section ">
                         <div className="list">
