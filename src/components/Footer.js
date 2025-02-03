@@ -13,7 +13,7 @@ export default function Footer() {
           </a>
         </li>
       </ul>
-      <span>Updated Jan 01, 2025.</span>
+      <span>Updated Feb, 2025.</span>
     </footer>
   );
 }
