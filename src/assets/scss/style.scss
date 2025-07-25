@@ -448,19 +448,19 @@ main {
         display: flex;
         > li {
             .download {
-                background: url('../images/ico-download.png') left center no-repeat;
-                background-size: 15px 15px;
-                padding-left: 20px;
+                background: url('../images/ico-download.png') 0px -2px no-repeat;
+                background-size: 16px 16px;
+                padding-left: 22px;
             }
             .link {
-                background: url('../images/ico-link.png') left center no-repeat;
-                background-size: 15px 15px;
+                background: url('../images/ico-link.png') left -2px no-repeat;
+                background-size: 16px 16px;
                 padding-left: 20px;
             }
             + li {
                 position: relative;
-                padding-left: 25px;
-                margin-left: 25px;
+                padding-left: 22px;
+                margin-left: 20px;
                 &::after {
                     content: '';
                     position: absolute;
