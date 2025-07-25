@@ -1,396 +1,219 @@
-/* eslint-disable no-loop-func */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Wrapper from '../components/Wrapper';
 import { Link } from 'react-router-dom';
 import Data from '../data.json';
-export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
+
+export default function Header({ filterItem, setItem, menuItems, itemCounts, scrollbar, scrollRef }) {
+    // 드롭다운 상태
     const [isOpen, setIsOpen] = useState(false);
     const [kindOpen, setKindOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState(getSelectedValueFromLocalStorage() || 'Project');
-    const [catagoryValue, setCatagoryValue] = useState('All');
+    // 선택된 메뉴/카테고리 상태
+    const [selectedValue, setSelectedValue] = useState(() => localStorage.getItem('selectedValue') || 'Project');
+    const [categoryValue, setCategoryValue] = useState('All');
+    // 헤더/스크롤 상태
     const [scroll, setScroll] = useState(false);
     const [isHeader, setHeader] = useState(false);
-    let prevScroll = 0;
-    let timer;
-    let getAllCount = Data.main.length;
-    let el = useRef();
-    //새로고침 시 LocalStorage 데이터 유지
-    function saveSelectedValueToLocalStorage(value) {
-        localStorage.setItem('selectedValue', value);
-    }
-    function getSelectedValueFromLocalStorage() {
-        return localStorage.getItem('selectedValue');
-    }
 
-    function handleScroll() {
-        if (timer) {
-            clearTimeout(timer);
-        }
-        let mainScrollY = document.querySelector('.sub-section .list');
-        const currScroll = mainScrollY.scrollTop;
-        // 모바일 헤더 영역
+    // 내부 참조 및 타이머
+    const timer = useRef(null);
+    const prevScroll = useRef(0);
+    const el = useRef(null);
+
+    const getAllCount = Data.main.length;
+
+    // 스크롤 이벤트 핸들러
+    const onScroll = useCallback((status) => {
+        const currScroll = status.offset.y;
+        if (timer.current) clearTimeout(timer.current);
+
         if (window.innerWidth <= 720) {
-            if (prevScroll > currScroll) {
-                timer = setTimeout(() => {
-                    setScroll(false);
-                }, 20);
-            } else {
-                timer = setTimeout(() => {
-                    setScroll(true);
-                }, 20);
-            }
-
-            prevScroll = currScroll;
-        }
-
-        // 화면 헤더 영역
-        if (window.innerWidth >= 720) {
-            if (prevScroll > currScroll) {
-                setHeader(isHeader);
-            } else {
-                setHeader(!isHeader);
-            }
-        }
-        //스크롤 시 드롭다운 삭제
-        if (prevScroll > currScroll) {
-            setKindOpen(kindOpen);
-            setIsOpen(isOpen);
+            timer.current = setTimeout(() => {
+                setScroll(prevScroll.current > currScroll ? false : true);
+            }, 20);
         } else {
-            setKindOpen(kindOpen);
-            setIsOpen(isOpen);
+            setHeader(prevScroll.current > currScroll);
         }
-        prevScroll = currScroll;
-    }
-    function handleBeforeUnload() {
-        if (timer) {
-            clearTimeout(timer);
-        }
-        setTimeout(() => {
-            let subPageScrollY = document.querySelector('main');
-            //경력페이지 스크롤시 드롭다운 제거 및 스크롤 무빙
+        prevScroll.current = currScroll;
+    }, []);
 
-            let subScroll = subPageScrollY.scrollTop;
-            if (prevScroll > subScroll) {
-                if (isOpen) {
-                    setIsOpen(!isOpen);
-                }
-            } else {
-                if (isOpen) {
-                    setIsOpen(!isOpen);
-                }
-            }
+    // 외부 클릭 시 드롭다운 닫기
+    const handleClickOutside = useCallback(
+        (e) => {
+            if (isOpen && el.current && !el.current.contains(e.target)) setIsOpen(false);
+            if (kindOpen && el.current && !el.current.contains(e.target)) setKindOpen(false);
+        },
+        [isOpen, kindOpen]
+    );
 
-            // 화면 헤더 영역 숨기기
-            if (window.innerWidth >= 720) {
-                if (prevScroll > subScroll) {
-                    timer = setTimeout(() => {
-                        if (isHeader) {
-                            setHeader(isHeader);
-                            console.log('1');
-                        }
-                    }, 1000);
-                } else {
-                    timer = setTimeout(() => {
-                        if (isHeader) {
-                            setHeader(!isHeader);
-                            console.log('2');
-                        }
-                    }, 1000);
-                }
-            }
+    // 선택값 localStorage 저장
+    const saveSelectedValueToLocalStorage = (value) => {
+        localStorage.setItem('selectedValue', value);
+    };
 
-            prevScroll = subScroll;
-        }, 1000);
-    }
-    // 클릭 시 다시 랜더링
-    function reRender() {
-        setTimeout(() => {
-            let currentScrollY = document.querySelector('.sub-section .list');
-            // let subPageScrollY = document.querySelector('main');
+    // 메뉴 선택 처리
+    const handleSelect = (value) => {
+        setSelectedValue(value);
+        saveSelectedValueToLocalStorage(value);
+        setIsOpen(false);
+    };
 
-            // //경력페이지 스크롤시 드롭다운 제거 및 스크롤 무빙
-            // subPageScrollY.addEventListener('scroll', function () {
-            //     let subScroll = subPageScrollY.scrollTop;
-            //     if (prevScroll > subScroll) {
-            //         setIsOpen(!isOpen);
-            //     } else {
-            //         setIsOpen(!isOpen);
-            //     }
+    // 카테고리 선택 처리
+    const handleCategory = (value) => {
+        setCategoryValue(value);
+        setKindOpen(false);
+    };
 
-            //     // 화면 헤더 영역 숨기기
-            //     if (window.innerWidth >= 720) {
-            //         if (prevScroll > subScroll) {
-            //             timer = setTimeout(() => {
-            //                 setHeader(isHeader);
-            //             }, 100);
-            //         } else {
-            //             timer = setTimeout(() => {
-            //                 setHeader(!isHeader);
-            //             }, 100);
-            //         }
-            //     }
+    // 메뉴 드롭다운 토글
+    const toggleDropdown = () => {
+        setIsOpen((prev) => !prev);
+        if (kindOpen) setKindOpen(false);
+    };
 
-            //     prevScroll = subScroll;
-            // });
+    // 카테고리 드롭다운 토글
+    const categoryDropdown = () => {
+        setKindOpen((prev) => !prev);
+        if (isOpen) setIsOpen(false);
+    };
 
-            currentScrollY.addEventListener('scroll', function () {
-                if (timer) {
-                    clearTimeout(timer);
-                }
-
-                // 모바일 영역 삭제
-                const currScroll = this.scrollTop;
-                if (window.innerWidth <= 720) {
-                    if (prevScroll > currScroll) {
-                        timer = setTimeout(() => {
-                            setScroll(false);
-                        }, 20);
-                    } else {
-                        timer = setTimeout(() => {
-                            setScroll(true);
-                        }, 20);
-                    }
-                    prevScroll = currScroll;
-                }
-
-                // 화면 헤더 영역 숨기기
-                if (window.innerWidth >= 720) {
-                    if (prevScroll > currScroll) {
-                        timer = setTimeout(() => {
-                            setHeader(isHeader);
-                        }, 100);
-                    } else {
-                        timer = setTimeout(() => {
-                            setHeader(!isHeader);
-                        }, 100);
-                    }
-                }
-                //스크롤 시 드롭다운 삭제
-                if (prevScroll > currScroll) {
-                    timer = setTimeout(() => {
-                        if (isOpen) {
-                            setIsOpen(!isOpen);
-                        }
-                        setKindOpen(kindOpen);
-                    }, 20);
-                } else {
-                    timer = setTimeout(() => {
-                        if (isOpen) {
-                            setIsOpen(!isOpen);
-                        }
-                        setKindOpen(kindOpen);
-                    }, 20);
-                }
-                prevScroll = currScroll;
-            });
-        }, 25);
-    }
-    function syncHeight() {
+    // 화면 높이 CSS 변수 동기화
+    const syncHeight = useCallback(() => {
         document.documentElement.style.setProperty('--window-inner-height', `${window.innerHeight}px`);
-    }
-    function handleTop(ms) {
-        let catagorySelect = document.querySelectorAll('.select');
-        let mainTop = document.querySelector('.sub-section .list');
+    }, []);
 
-        if (window.innerWidth >= 720) {
-            catagorySelect.forEach(() => {
-                setTimeout(() => {
-                    mainTop.scrollTo({ top: 0, behavior: 'smooth' });
-                    let gnb = document.querySelector('.gnb');
-                    gnb.classList.remove('minimized');
-                }, 100);
-            });
-        } else {
-            setScroll(false);
+    // gnb 너비 조정
+    const projectClickHandler = useCallback(() => {
+        const gnb = document.querySelector('.gnb');
+        if (!gnb) return;
+
+        // Career에서 로고 클릭 시에도 480px로 강제 지정
+        if (selectedValue === 'Project') {
+            gnb.style.width = '480px';
+            return;
         }
-
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-    function process() {
-        handleTop();
-    }
-    function projectClickHandler() {
-        let gnb = document.querySelector('.gnb');
-        let rowSel = document.querySelectorAll('.custom-sel');
-        let selCount = rowSel.length;
-        let windowWidth = window.innerWidth;
+        const rowSel = document.querySelectorAll('.custom-sel');
+        const selCount = rowSel.length;
+        const windowWidth = window.innerWidth;
 
         if (windowWidth >= 720 && selCount === 2) {
             gnb.style.width = '480px';
         } else if (windowWidth >= 720 && selCount === 1) {
             gnb.style.width = '310px';
-        } else if (windowWidth <= 720 && selCount === 2) {
+        } else if (windowWidth < 720 && selCount === 2) {
             gnb.style.width = '330px';
-        } else if (windowWidth <= 720 && selCount === 1) {
+        } else if (windowWidth < 720 && selCount === 1) {
             gnb.style.width = '198px';
         } else {
             gnb.removeAttribute('style');
         }
-    }
+    }, [selectedValue]);
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-        if (kindOpen) {
-            setKindOpen(!kindOpen);
+    // 필터/카테고리 선택 시 리스트 상단으로 스크롤
+    const process = useCallback(() => {
+        if (scrollRef && scrollRef.current && scrollRef.current.scrollbar) {
+            scrollRef.current.scrollbar.scrollTo(0, 0, 600);
+        } else {
+            const mainTop = document.querySelector('.sub-section .list');
+            if (mainTop) mainTop.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    };
-    const catagoryDropdown = () => {
-        setKindOpen(!kindOpen);
-        if (isOpen) {
-            setIsOpen(!isOpen);
-        }
-    };
-    const handleSelect = (value) => {
-        setSelectedValue(value);
-        saveSelectedValueToLocalStorage(value);
-        if (isOpen) {
-            setIsOpen(!isOpen);
-        }
-    };
-    const handleCatagory = (value) => {
-        setCatagoryValue(value);
-        if (kindOpen) {
-            setKindOpen(!kindOpen);
-        }
-    };
-    const handleCloseSelect = (e) => {
-        if (isOpen && (!el.current || !el.current.contains(e.target))) setIsOpen(false);
-    };
-    const catagoryCloseSelect = (e) => {
-        if (kindOpen && (!el.current || !el.current.contains(e.target))) setKindOpen(false);
-    };
-    // useEffect(() => {
-    //     const handleBeforeUnload = () => {
-    //         let subPageScrollY = document.querySelector('main');
-    //         //경력페이지 스크롤시 드롭다운 제거 및 스크롤 무빙
-    //         console.log('페이지가 새로고침되었습니다!');
-    //         let subScroll = subPageScrollY.scrollTop;
-    //         if (prevScroll > subScroll) {
-    //             setIsOpen(isOpen);
-    //         } else {
-    //             setIsOpen(isOpen);
-    //         }
+    }, [scrollRef]);
 
-    //         // 화면 헤더 영역 숨기기
-    //         if (window.innerWidth >= 720) {
-    //             if (prevScroll > subScroll) {
-    //                 // eslint-disable-next-line react-hooks/exhaustive-deps
-    //                 timer = setTimeout(() => {
-    //                     setHeader(isHeader);
-    //                     console.log('1');
-    //                 }, 100);
-    //             } else {
-    //                 timer = setTimeout(() => {
-    //                     setHeader(!isHeader);
-    //                     console.log('2');
-    //                 }, 100);
-    //             }
-    //         }
+    // 스크롤바 이벤트 등록/해제
+    useEffect(() => {
+        if (!scrollbar) return;
+        scrollbar.addListener(onScroll);
+        return () => {
+            if (scrollbar) scrollbar.removeListener(onScroll);
+            if (timer.current) clearTimeout(timer.current);
+        };
+    }, [scrollbar, onScroll]);
 
-    //         prevScroll = subScroll;
-    //     };
-    //     handleBeforeUnload();
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, []);
-
+    // window 이벤트 및 DOM 이벤트 관리
     useEffect(() => {
         syncHeight();
         projectClickHandler();
-        window.addEventListener('click', handleCloseSelect);
-        window.addEventListener('click', catagoryCloseSelect);
-        window.addEventListener('resize', projectClickHandler);
+
+        window.addEventListener('click', handleClickOutside);
+        window.addEventListener('resize', () => {
+            projectClickHandler();
+            syncHeight();
+        });
+
+        const currentScrollY = document.querySelector('.sub-section .scroll-content');
+        if (currentScrollY) currentScrollY.addEventListener('scroll', () => {});
+
+        // cleanup
         return () => {
-            window.removeEventListener('click', handleCloseSelect);
-            window.removeEventListener('click', catagoryCloseSelect);
-            window.removeEventListener('resize', projectClickHandler);
-            window.removeEventListener('resize', syncHeight);
+            window.removeEventListener('click', handleClickOutside);
+            window.removeEventListener('resize', () => {
+                projectClickHandler();
+                syncHeight();
+            });
+            if (currentScrollY) currentScrollY.removeEventListener('scroll', () => {});
         };
-    });
-
-    useEffect(() => {
-        let currentScrollY = document.querySelector('.sub-section .list');
-        currentScrollY.addEventListener('scroll', handleScroll);
-        return () => {
-            handleScroll();
-            currentScrollY.removeEventListener('scroll', handleScroll);
-        };
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setScroll]);
-
-    useEffect(() => {
-        let currentScrollY = document.querySelector('main');
-        currentScrollY.addEventListener('scroll', handleBeforeUnload);
-        handleBeforeUnload();
-        return () => {
-            currentScrollY.removeEventListener('scroll', handleBeforeUnload);
-        };
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setHeader]);
+    }, [handleClickOutside, projectClickHandler, syncHeight]);
 
     return (
         <header id="header" className={`header ${isHeader ? 'has-transform' : ''}`} ref={el}>
             <div className={`gnb ${scroll ? 'minimized' : ''}`}>
                 <div className="row-sel">
+                    {/* 메인 네임 클릭 시 Project 선택 및 상단 스크롤 */}
                     <Link
                         to="/project"
                         className="name"
                         onClick={() => {
                             handleSelect('Project');
-                            reRender();
+                            process();
+                            projectClickHandler();
                         }}
                     >
                         Wang
                     </Link>
-                    <Wrapper>
-                        <div className={`custom-sel ${isOpen ? 'open' : ''}`}>
-                            <button type="button" onClick={toggleDropdown}>
-                                {selectedValue}
-                            </button>
-                            <ul className="list">
-                                <li
-                                    className="project"
-                                    onClick={() => {
-                                        handleSelect('Project');
-                                        reRender();
-                                    }}
-                                >
-                                    <Link to="/project">Project</Link>
-                                </li>
-                                <li
-                                    className="career"
-                                    onClick={() => {
-                                        handleSelect('Career');
-                                        reRender();
-                                    }}
-                                >
-                                    <Link to="/career">Career</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </Wrapper>
+
+                    {/* 메뉴 드롭다운 (애니메이션 Wrapper 제거!) */}
+                    <div className={`custom-sel ${isOpen ? 'open' : ''}`}>
+                        <button type="button" onClick={toggleDropdown}>
+                            {selectedValue}
+                        </button>
+                        <ul className="list">
+                            <li
+                                className="project"
+                                onClick={() => {
+                                    handleSelect('Project');
+                                    process();
+                                }}
+                            >
+                                <Link to="/project">Project</Link>
+                            </li>
+                            <li
+                                className="career"
+                                onClick={() => {
+                                    handleSelect('Career');
+                                    process();
+                                }}
+                            >
+                                <Link to="/career">Career</Link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* 카테고리 드롭다운 (애니메이션 유지) */}
                     {selectedValue !== 'Career' && (
                         <Wrapper>
                             <div className={`custom-sel ${kindOpen ? 'open' : ''}`}>
-                                <button type="button" onClick={catagoryDropdown}>
-                                    {catagoryValue === 'All' ? (
+                                <button type="button" onClick={categoryDropdown}>
+                                    {categoryValue === 'All' ? (
                                         <span>
                                             All<span className="count">{getAllCount}</span>
                                         </span>
                                     ) : (
                                         <span>
-                                            {catagoryValue}
-                                            <span className="count">{itemCounts[catagoryValue]}</span>
+                                            {categoryValue}
+                                            <span className="count">{itemCounts[categoryValue]}</span>
                                         </span>
-                                    )}{' '}
+                                    )}
                                 </button>
                                 <ul className="list">
-                                    <li onClick={() => handleCatagory('All')} className="select">
+                                    <li onClick={() => handleCategory('All')} className="select">
                                         <button
                                             type="button"
                                             onClick={() => {
@@ -399,26 +222,23 @@ export default function Header({ filterItem, setItem, menuItems, itemCounts }) {
                                             }}
                                         >
                                             <span>All</span>
-
                                             <span className="count">{getAllCount}</span>
                                         </button>
                                     </li>
-                                    {menuItems.map((Val, id) => {
-                                        return (
-                                            <li onClick={() => handleCatagory(Val)} key={id} className="select">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        filterItem(Val);
-                                                        process();
-                                                    }}
-                                                >
-                                                    <span>{Val}</span>
-                                                    <span className="count">{itemCounts[Val]}</span>
-                                                </button>
-                                            </li>
-                                        );
-                                    })}
+                                    {menuItems.map((Val) => (
+                                        <li key={Val} onClick={() => handleCategory(Val)} className="select">
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    filterItem(Val);
+                                                    process();
+                                                }}
+                                            >
+                                                <span>{Val}</span>
+                                                <span className="count">{itemCounts[Val]}</span>
+                                            </button>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </Wrapper>

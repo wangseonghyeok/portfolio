@@ -21,8 +21,12 @@
     height: 100%;
     z-index: -1;
 }
-
+.scrollbar-track.scrollbar-track-x,
+.scrollbar-track.scrollbar-track-y {
+    display: none !important;
+}
 /* common */
+
 html {
     &.is-locked {
         body {
@@ -65,10 +69,12 @@ header {
 }
 /* main */
 main {
-    height: calc(100vh - 40px);
-    border: 10px solid #000;
+    height: calc(100vh - 35px);
+    border-top: 10px solid #000;
+    border-left: 10px solid #000;
+    border-right: 10px solid #000;
     border-radius: 40px;
-    overflow: auto;
+    overflow-y: scroll;
     isolation: isolate;
     &::-webkit-scrollbar {
         display: none; /* 크롬, 사파리, 오페라, 엣지 */
@@ -78,7 +84,6 @@ main {
     .sub-section {
         .list {
             height: calc(var(--window-inner-height));
-            overflow-y: auto;
             scroll-snap-type: y mandatory;
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -360,7 +365,7 @@ main {
         border-radius: 22px;
         color: #000;
         padding: 0 36px 0 12px;
-        background: #fff url('/public/assets/images/arrow-down.png') right 12px center no-repeat;
+        background: #fff url('../images/arrow-down.png') right 12px center no-repeat;
         background-size: 12px 7px;
         text-align: left;
         font-weight: 600;
@@ -388,7 +393,7 @@ main {
     &.open {
         > button {
             border-radius: 22px 22px 0px 0px;
-            background-image: url('/public/assets/images/arrow-up.png');
+            background-image: url('../images/arrow-up.png');
         }
         .list {
             animation: dropdown 0.3s ease;
@@ -438,17 +443,17 @@ main {
 #footer {
     display: flex;
     justify-content: space-between;
-    padding: 6px 10px;
+    padding: 10px;
     ul {
         display: flex;
         > li {
             .download {
-                background: url('/public/assets/images/ico-download.png') left center no-repeat;
+                background: url('../images/ico-download.png') left center no-repeat;
                 background-size: 15px 15px;
                 padding-left: 20px;
             }
             .link {
-                background: url('/public/assets/images/ico-link.png') left center no-repeat;
+                background: url('../images/ico-link.png') left center no-repeat;
                 background-size: 15px 15px;
                 padding-left: 20px;
             }
@@ -476,6 +481,8 @@ main {
             .list {
                 &.grid {
                     grid-template-columns: 1fr 1fr 1fr;
+                    .scroll-content {
+                    }
                 }
             }
         }
@@ -487,6 +494,8 @@ main {
             .list {
                 &.grid {
                     grid-template-columns: 1fr 1fr;
+                    .scroll-content {
+                    }
                 }
             }
         }
@@ -570,13 +579,10 @@ main {
     }
 
     .main-section .sub-section .list {
+        overflow-y: scroll;
         > div {
             height: 100%;
-            // + div {
-            //     padding-top: rem(10px);
-            // }
         }
-        // height: calc(var(--window-inner-height));
         .pf-list-item {
             .pf-list-inner {
                 .pf {

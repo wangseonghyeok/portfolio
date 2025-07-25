@@ -1,41 +1,28 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./assets/css/style.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Main from "./components/Main";
-import Career from "./components/Career";
-import Data from "./data.json";
+import React, { useState, useRef } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Footer from './components/Footer';
+import Data from './data.json';
+import Router from './Router';
+import './assets/scss/style.scss';
 
+// 앱의 루트 컴포넌트
 function App() {
-  const [item, setItem] = useState(Data.main);
-  const menuItems = [...new Set(Data.main.map((Val) => Val.category))];
-  const filterItem = (curcat) => {
-    const newItem = Data.main.filter((newVal) => {
-      return newVal.category === curcat;
-    });
-    setItem(newItem);
-  };
-  const visibleItems = Data.main.filter((item) => item.isVisible);
-  const getElCount = visibleItems.map((Val) => Val.category);
-  const itemCounts = {};
-  menuItems.forEach((category) => {
-    const count = getElCount.filter((item) => item.includes(category)).length;
-    itemCounts[category] = count;
-  });
-  return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <div className="App">
-        <Header filterItem={filterItem} setItem={setItem} menuItems={menuItems} itemCounts={itemCounts} />
-        <Routes>
-          <Route path="/" element={<Main item={item} />} />
-          <Route path="/project" element={<Main item={item} />} />
-          <Route path="/career" element={<Career />} />
-        </Routes>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
+    // 스크롤바 제어용 ref (자식 컴포넌트에 전달)
+    const scrollRef = useRef(null);
+    // 현재 보여줄 아이템 리스트 상태
+    const [item, setItem] = useState(Data.main);
+
+    return (
+        // 라우터 설정 (PUBLIC_URL 기준)
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <div className="App">
+                {/* 라우터 및 페이지 렌더링, 스크롤 ref 전달 */}
+                <Router item={item} setItem={setItem} scrollRef={scrollRef} />
+                {/* 하단 푸터 */}
+                <Footer />
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
